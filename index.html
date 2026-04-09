@@ -8,58 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --light-parchment: #fdfcf9;
-            --soft-cream: #f4f1ea;
-            --text-dark: #2c2c2c;
-            --crimson: #8b0000;
-        }
-
-        body {
-            background-color: var(--light-parchment);
-            color: var(--text-dark);
-            font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
-        }
-
-        h1, h2, h3, .serif {
-            font-family: 'Playfair Display', serif;
-        }
-
-        .cinzel {
-            font-family: 'Cinzel', serif;
-        }
-
-        .beadwork-divider {
-            height: 12px;
-            background-image: radial-gradient(var(--crimson) 2px, transparent 2px);
-            background-size: 10px 10px;
-            width: 100%;
-            opacity: 0.4;
-        }
-
-        .doc-texture {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.4;
-            pointer-events: none;
-            z-index: 50;
-            background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
-        }
-
-        .fade-in {
-            animation: fadeIn 1.5s ease-out forwards;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
+    
+<link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body class="relative">
     <div class="doc-texture"></div>
