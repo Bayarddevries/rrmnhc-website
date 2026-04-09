@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RRMNHC | Coming Soon</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --light-parchment: #fdfcf9;
+            --soft-cream: #f4f1ea;
+            --text-dark: #2c2c2c;
+            --crimson: #8b0000;
+        }
+
+        body {
+            background-color: var(--light-parchment);
+            color: var(--text-dark);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .cinzel {
+            font-family: 'Cinzel', serif;
+        }
+
+        .beadwork-divider {
+            height: 12px;
+            background-image: radial-gradient(var(--crimson) 2px, transparent 2px);
+            background-size: 10px 10px;
+            width: 100%;
+            opacity: 0.4;
+        }
+
+        .doc-texture {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.4;
+            pointer-events: none;
+            z-index: 50;
+            background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+        }
+
+        .fade-in {
+            animation: fadeIn 1.5s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="relative">
+    <div class="doc-texture"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 w-full z-[100] px-6 py-6 flex justify-between items-center bg-transparent">
+        <div class="cinzel font-bold text-xs tracking-widest text-red-800">RRMNHC</div>
+        <div class="flex gap-8 text-xs uppercase tracking-widest font-medium opacity-70">
+            <a href="#" class="hover:text-red-800 transition-colors">News</a>
+            <a href="#" class="hover:text-red-800 transition-colors">Contact Us</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex flex-col items-center justify-center text-center px-4">
+        <div class="z-10 fade-in">
+            <p class="cinzel text-sm md:text-lg tracking-[0.3em] text-red-800 mb-4 uppercase">La Plas Taanshi kaa-Ishipamachihoyaahk</p>
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight text-[#1a1a1a]">
+                Red River Métis <br> <span class="italic">National Heritage Centre</span>
+            </h1>
+            <div class="w-24 h-1 bg-red-800 mx-auto mb-8"></div>
+            <p class="text-xl md:text-2xl font-light tracking-wide max-w-2xl mx-auto opacity-80">
+                A living landmark. A digital bridge between the past and the future.
+            </p>
+            <p class="mt-12 cinzel text-lg tracking-widest opacity-60">Opening 2027</p>
+        </div>
+    </section>
+
+    <div class="beadwork-divider"></div>
+
+    <!-- Citizen Engagement -->
+    <section class="py-24 px-6 text-center">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6 text-[#1a1a1a]">Contribute Your History</h2>
+            <p class="text-lg opacity-70 mb-12">Lend your voice to the living archive. Whether it's a photograph, a letter, or a story, your legacy belongs here.</p>
+            
+            <form class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left bg-white p-8 rounded-sm border border-gray-200 shadow-sm">
+                <div class="flex flex-col">
+                    <label class="text-xs uppercase tracking-widest opacity-50 mb-2">Full Name</label>
+                    <input type="text" class="bg-transparent border-b border-gray-300 py-2 focus:border-red-800 outline-none transition-colors" placeholder="Enter your name">
+                </div>
+                <div class="flex flex-col">
+                    <label class="text-xs uppercase tracking-widest opacity-50 mb-2">Email Address</label>
+                    <input type="email" class="bg-transparent border-b border-gray-300 py-2 focus:border-red-800 outline-none transition-colors" placeholder="email@example.com">
+                </div>
+                <div class="flex flex-col md:col-span-2 mt-4">
+                    <label class="text-xs uppercase tracking-widest opacity-50 mb-2">What can you share?</label>
+                    <select class="bg-transparent border-b border-gray-300 py-2 focus:border-red-800 outline-none transition-colors">
+                        <option class="bg-white">Family Photographs</option>
+                        <option class="bg-white">Oral Histories/Recordings</option>
+                        <option class="bg-white">Documents/Letters</option>
+                        <option class="bg-white">Traditional Craftwork</option>
+                    </select>
+                </div>
+                <button class="md:col-span-2 mt-8 bg-red-900 hover:bg-red-800 text-white py-4 cinzel tracking-widest transition-all uppercase font-bold">
+                    Join the Archive
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="py-12 px-6 border-t border-gray-200 text-center opacity-60">
+        <p class="cinzel text-sm tracking-widest mb-2">335 Main Street, Winnipeg, MB</p>
+        <p class="text-xs">&copy; 2026 Red River Métis National Heritage Centre. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
