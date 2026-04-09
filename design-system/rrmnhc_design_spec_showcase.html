@@ -3,248 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RRMNHC Design Spec Showcase</title>
+    <title>RRMNHC | Design Lab</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
     <style>
-        :root {
-            --rrmnhc-red: #8B0000;
-            --rrmnhc-cream: #F5F5DC;
-            --rrmnhc-green: #228B22;
-            --rrmnhc-gold: #FFD700;
-            --rrmnhc-blue: #0047AB;
-            --rrmnhc-charcoal: #36454F;
-        }
-
-        body {
-            background-color: var(--rrmnhc-cream);
-            color: var(--rrmnhc-charcoal);
-            font-family: 'Inter', sans-serif;
-        }
-
-        h1, h2, h3 {
-            font-family: 'Playfair Display', serif;
-        }
-
-        .beadwork-divider {
-            height: 12px;
-            background-image: radial-gradient(circle, var(--rrmnhc-red) 30%, transparent 35%);
-            background-size: 15px 15px;
-            width: 100%;
-            opacity: 0.6;
-        }
-
-        .spoke-divider {
-            height: 40px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
-        .spoke-pattern {
-            width: 100%;
-            height: 2px;
-            background: repeating-linear-gradient(
-                90deg,
-                var(--rrmnhc-charcoal),
-                var(--rrmnhc-charcoal) 10px,
-                transparent 10px,
-                transparent 20px
-            );
-            transform: rotate(45deg);
-            opacity: 0.2;
-        }
-
-        .btn-cart {
-            background-color: var(--rrmnhc-red);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 2px;
-            font-weight: 600;
-            position: relative;
-            transition: all 0.3s ease;
-            border-bottom: 4px solid #5a0000;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-        .btn-cart:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(139, 0, 0, 0.3);
-        }
-
-        .cart-loader {
-            width: 50px;
-            height: 50px;
-            border: 4px dashed var(--rrmnhc-red);
-            border-radius: 50%;
-            animation: spin 3s linear infinite;
-            position: relative;
-        }
-        .cart-loader::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 10px;
-            height: 10px;
-            background: var(--rrmnhc-red);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-        }
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .vine-nav {
-            display: flex;
-            gap: 2rem;
-            padding: 1rem;
-        }
-        .vine-node {
-            position: relative;
-            padding: 0.5rem 1rem;
-            cursor: pointer;
-        }
-        .vine-node::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: -1rem;
-            width: 1rem;
-            height: 2px;
-            background: var(--rrmnhc-green);
-            transform: rotate(-45deg);
-            opacity: 0.4;
-        }
-
-        .offset-grid {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 1rem;
-        }
-        .offset-item-1 { grid-column: 1 / span 7; }
-        .offset-item-2 { grid-column: 8 / span 5; margin-top: 2rem; }
-
+        .token-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+        .token-box { border: 1px solid var(--rrmnhc-border); padding: 1rem; background: white; border-radius: var(--radius-md); }
+        .color-swatch { width: 100%; height: 40px; border-radius: var(--radius-sm); margin-bottom: 0.5rem; border: 1px solid #ddd; }
     </style>
 </head>
-<body class="p-8">
+<body class="relative bg-gray-50">
+    <div class="doc-texture"></div>
+    
+    <nav class="fixed top-0 left-0 w-full z-[100] px-6 py-6 flex justify-between items-center bg-white/80 backdrop-blur-sm border-b border-gray-200">
+        <div class="cinzel font-bold text-xs tracking-widest text-red-800">RRMNHC DESIGN LAB</div>
+        <a href="../index.html" class="text-xs uppercase tracking-widest opacity-60 hover:opacity-100 transition-opacity">Back to Site</a>
+    </nav>
 
-    <header class="max-w-5xl mx-auto mb-12 border-b-2 border-dotted border-gray-400 pb-6">
-        <h1 class="text-5xl mb-2">RRMNHC Design Spec Showcase</h1>
-        <p class="text-xl text-gray-600 italic">"Authentic. Monumental. Accessible."</p>
-    </header>
+    <main class="pt-32 px-8 pb-24 max-w-6xl mx-auto">
+        <header class="mb-16">
+            <h1 class="text-5xl font-bold mb-4">Design Token Lab</h1>
+            <p class="text-lg opacity-70">The living source of truth for the RRMNHC visual identity. Adjust these tokens to update the entire ecosystem.</p>
+        </header>
 
-    <main class="max-w-5xl mx-auto space-y-20">
-
-        <section>
-            <h2 class="text-3xl mb-6">1. The Palette Lab (19th-Century Authentic)</h2>
-            <div class="grid grid-cols-2 md:grid-cols-6 gap-4">
-                <div class="space-y-2">
-                    <div class="h-24 w-full rounded shadow-inner" style="background-color: var(--rrmnhc-red);"></div>
-                    <p class="text-sm font-bold">Deep Red</p>
-                    <p class="text-xs text-gray-500">#8B0000</p>
+        <!-- Color Palette Section -->
+        <section class="mb-20">
+            <h2 class="cinzel text-2xl tracking-widest text-red-800 mb-8 border-b pb-2">Color Palette</h2>
+            <div class="token-grid">
+                <div class="token-box">
+                    <div class="color-swatch" style="background-color: var(--rrmnhc-crimson)"></div>
+                    <div class="text-xs font-bold uppercase">Crimson</div>
+                    <div class="text-[10px] opacity-50">--rrmnhc-crimson</div>
                 </div>
-                <div class="space-y-2">
-                    <div class="h-24 w-full rounded shadow-inner" style="background-color: var(--rrmnhc-cream);"></div>
-                    <p class="text-sm font-bold">Parchment</p>
-                    <p class="text-xs text-gray-500">#F5F5DC</p>
+                <div class="token-box">
+                    <div class="color-swatch" style="background-color: var(--rrmnhc-parchment)"></div>
+                    <div class="text-xs font-bold uppercase">Parchment</div>
+                    <div class="text-[10px] opacity-50">--rrmnhc-parchment</div>
                 </div>
-                <div class="space-y-2">
-                    <div class="h-24 w-full rounded shadow-inner" style="background-color: var(--rrmnhc-green);"></div>
-                    <p class="text-sm font-bold">Forest Green</p>
-                    <p class="text-xs text-gray-500">#228B22</p>
+                <div class="token-box">
+                    <div class="color-swatch" style="background-color: var(--rrmnhc-charcoal)"></div>
+                    <div class="text-xs font-bold uppercase">Charcoal</div>
+                    <div class="text-[10px] opacity-50">--rrmnhc-charcoal</div>
                 </div>
-                <div class="space-y-2">
-                    <div class="h-24 w-full rounded shadow-inner" style="background-color: var(--rrmnhc-gold);"></div>
-                    <p class="text-sm font-bold">Golden Yellow</p>
-                    <p class="text-xs text-gray-500">#FFD700</p>
-                </div>
-                <div class="space-y-2">
-                    <div class="h-24 w-full rounded shadow-inner" style="background-color: var(--rrmnhc-blue);"></div>
-                    <p class="text-sm font-bold">Cobalt Blue</p>
-                    <p class="text-xs text-gray-500">#0047AB</p>
-                </div>
-                <div class="space-y-2">
-                    <div class="h-24 w-full rounded shadow-inner" style="background-color: var(--rrmnhc-charcoal);"></div>
-                    <p class="text-sm font-bold">Charcoal</p>
-                    <p class="text-xs text-gray-500">#36454F</p>
+                <div class="token-box">
+                    <div class="color-swatch" style="background-color: var(--rrmnhc-white)"></div>
+                    <div class="text-xs font-bold uppercase">White</div>
+                    <div class="text-[10px] opacity-50">--rrmnhc-white</div>
                 </div>
             </div>
         </section>
 
-        <section>
-            <h2 class="text-3xl mb-6">2. The Pattern Lab (Cultural Motifs)</h2>
-            <div class="space-y-8">
-                <div>
-                    <p class="text-sm uppercase tracking-widest text-gray-500 mb-2">Beadwork Geometric Divider</p>
-                    <div class="beadwork-divider"></div>
+        <!-- Component Playground -->
+        <section class="mb-20">
+            <h2 class="cinzel text-2xl tracking-widest text-red-800 mb-8 border-b pb-2">Component Lab</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <!-- Button Tests -->
+                <div class="space-y-6">
+                    <h3 class="text-sm uppercase tracking-widest opacity-50">Buttons</h3>
+                    <div class="flex flex-wrap gap-4">
+                        <button class="btn-primary">Primary Action</button>
+                        <button class="btn-primary" style="background-color: var(--rrmnhc-charcoal);">Secondary Action</button>
+                    </div>
                 </div>
-                <div>
-                    <p class="text-sm uppercase tracking-widest text-gray-500 mb-2">Red River Spoke Pattern (Structural)</p>
-                    <div class="spoke-divider">
-                        <div class="spoke-pattern"></div>
+                <!-- Card Tests -->
+                <div class="space-y-6">
+                    <h3 class="text-sm uppercase tracking-widest opacity-50">Cards & Surfaces</h3>
+                    <div class="card">
+                        <p class="text-sm italic">This card uses the global tokens for padding, radius, and shadow.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section>
-            <h2 class="text-3xl mb-6">3. Typography Lab</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <div class="p-6 border border-gray-300 rounded">
-                    <p class="text-xs text-gray-400 mb-4">MONUMENTAL (SERIF)</p>
-                    <h3 class="text-4xl mb-4">Playfair Display</h3>
-                    <p class="text-lg">The weight and authority of history.</p>
+        <!-- Spacing & Typography Section -->
+        <section class="mb-20">
+            <h2 class="cinzel text-2xl tracking-widest text-red-800 mb-8 border-b pb-2">Typography & Rhythm</h2>
+            <div class="space-y-8 bg-white p-8 border border-gray-200 rounded-sm">
+                <div>
+                    <span class="text-xs opacity-40 block mb-2">H1 - 6xl</span>
+                    <h1 class="text-6xl font-bold">Monumental Heading</h1>
                 </div>
-                <div class="p-6 border border-gray-300 rounded">
-                    <p class="text-xs text-gray-400 mb-4">ACCESSIBLE (SANS)</p>
-                    <h3 class="text-4xl mb-4">Inter</h3>
-                    <p class="text-lg">The clarity of the modern digital bridge.</p>
+                <div>
+                    <span class="text-xs opacity-40 block mb-2">H2 - 4xl</span>
+                    <h2 class="text-4xl font-bold">Sub-heading Style</h2>
                 </div>
-            </div>
-        </section>
-
-        <section>
-            <h2 class="text-3xl mb-6">4. Component Lab (Micro-Interactions)</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="flex flex-col items-center space-y-4 p-8 bg-white/50 rounded-lg border border-gray-200">
-                    <p class="text-sm text-gray-500">Button Style</p>
-                    <button class="btn-cart">Contribute Story</button>
+                <div>
+                    <span class="text-xs opacity-40 block mb-2">Body - Base</span>
+                    <p class="text-base">The quick brown fox jumps over the lazy dog. This is the standard body text used for long-form narratives.</p>
                 </div>
-                <div class="flex flex-col items-center space-y-4 p-8 bg-white/50 rounded-lg border border-gray-200">
-                    <p class="text-sm text-gray-500">Loading State</p>
-                    <div class="cart-loader"></div>
-                </div>
-                <div class="flex flex-col items-center space-y-4 p-8 bg-white/50 rounded-lg border border-gray-200">
-                    <p class="text-sm text-gray-500">Vine-Path Nav</p>
-                    <nav class="vine-nav">
-                        <div class="vine-node">Home</div>
-                        <div class="vine-node">Archive</div>
-                    </nav>
+                <div>
+                    <span class="text-xs opacity-40 block mb-2">Captions - XS</span>
+                    <p class="text-xs uppercase tracking-widest opacity-60">Source: Archive 01-Settlements / Collection B</p>
                 </div>
             </div>
         </section>
-
-        <section class="pb-20">
-            <h2 class="text-3xl mb-6">5. Layout Lab (The "Hand-Stitched" Offset)</h2>
-            <div class="offset-grid">
-                <div class="offset-item-1 bg-white p-8 shadow-sm border border-gray-200">
-                    <h3 class="text-2xl mb-4">The Story Block</h3>
-                    <p class="text-gray-600">This block is aligned to the primary grid, providing a stable anchor for heavy text content.</p>
-                </div>
-                <div class="offset-item-2 bg-white p-8 shadow-sm border border-gray-200">
-                    <h3 class="text-2xl mb-4">The Accent Block</h3>
-                    <p class="text-gray-600">Notice the vertical offset. This mimics the non-linear, organic feel of a family album or a beaded sash.</p>
-                </div>
-            </div>
-        </section>
-
     </main>
-
-    <footer class="max-w-5xl mx-auto text-center text-gray-400 text-sm pb-12">
-        <p>RRMNHC Design Specification Prototype • Created for Bayard deVries</p>
-    </footer>
-
 </body>
 </html>

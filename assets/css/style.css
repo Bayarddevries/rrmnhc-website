@@ -1,33 +1,91 @@
+/* RRMNHC DESIGN SYSTEM - MASTER TOKENS */
 :root {
-    --light-parchment: #fdfcf9;
-    --soft-cream: #f4f1ea;
-    --text-dark: #2c2c2c;
-    --crimson: #8b0000;
+    /* --- COLOR PALETTE --- */
+    --rrmnhc-crimson: #8b0000;
+    --rrmnhc-crimson-light: #b30000;
+    --rrmnhc-parchment: #fdfcf9;
+    --rrmnhc-cream: #f4f1ea;
+    --rrmnhc-charcoal: #2c2c2c;
+    --rrmnhc-charcoal-light: #555555;
+    --rrmnhc-border: #e5e7eb;
+    --rrmnhc-white: #ffffff;
+
+    /* --- TYPOGRAPHY --- */
+    --font-serif: 'Playfair Display', serif;
+    --font-sans: 'Inter', sans-serif;
+    --font-cinzel: 'Cinzel', serif;
+    
+    --text-base: 1rem;
+    --text-sm: 0.875rem;
+    --text-xs: 0.75rem;
+    --text-lg: 1.125rem;
+    --text-xl: 1.25rem;
+    --text-2xl: 1.5rem;
+    --text-4xl: 2.25rem;
+    --text-6xl: 3.75rem;
+
+    /* --- SPACING SYSTEM --- */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+    --space-2xl: 3rem;
+    --space-3xl: 4rem;
+
+    /* --- BORDERS & RADIUS --- */
+    --radius-sm: 2px;
+    --radius-md: 4px;
+    --radius-lg: 8px;
+    --radius-pill: 9999px;
+
+    /* --- SHADOWS --- */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
 }
 
+/* --- RESET & BASE --- */
 body {
-    background-color: var(--light-parchment);
-    color: var(--text-dark);
-    font-family: 'Inter', sans-serif;
-    overflow-x: hidden;
+    background-color: var(--rrmnhc-parchment);
+    color: var(--rrmnhc-charcoal);
+    font-family: var(--font-sans);
     margin: 0;
-
-    position: relative;}
-
-h1, h2, h3, .serif {
-    font-family: 'Playfair Display', serif;
+    line-height: 1.5;
+    position: relative;
 }
 
-.cinzel {
-    font-family: 'Cinzel', serif;
-}
+h1, h2, h3, .serif { font-family: var(--font-serif); }
+.cinzel { font-family: var(--font-cinzel); }
 
+/* --- COMPONENT CLASSES --- */
 .beadwork-divider {
     height: 12px;
-    background-image: radial-gradient(var(--crimson) 2px, transparent 2px);
+    background-image: radial-gradient(var(--rrmnhc-crimson) 2px, transparent 2px);
     background-size: 10px 10px;
     width: 100%;
     opacity: 0.4;
+}
+
+.btn-primary {
+    background-color: var(--rrmnhc-crimson);
+    color: var(--rrmnhc-white);
+    padding: var(--space-md) var(--space-xl);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-cinzel);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: all 0.2s ease;
+    border: none;
+    cursor: pointer;
+}
+.btn-primary:hover { background-color: var(--rrmnhc-crimson-light); }
+
+.card {
+    background-color: var(--rrmnhc-white);
+    border: 1px solid var(--rrmnhc-border);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-lg);
 }
 
 .doc-texture {
@@ -40,13 +98,4 @@ h1, h2, h3, .serif {
     pointer-events: none;
     z-index: 50;
     background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
-}
-
-.fade-in {
-    animation: fadeIn 1.5s ease-out forwards;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
 }
