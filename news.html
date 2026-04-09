@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RRMNHC | News & Updates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --light-parchment: #fdfcf9;
+            --soft-cream: #f4f1ea;
+            --text-dark: #2c2c2c;
+            --crimson: #8b0000;
+        }
+
+        body {
+            background-color: var(--light-parchment);
+            color: var(--text-dark);
+            font-family: 'Inter', sans-serif;
+        }
+
+        h1, h2, h3, .serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .cinzel {
+            font-family: 'Cinzel', serif;
+        }
+
+        .beadwork-divider {
+            height: 12px;
+            background-image: radial-gradient(var(--crimson) 2px, transparent 2px);
+            background-size: 10px 10px;
+            width: 100%;
+            opacity: 0.4;
+        }
+
+        .doc-texture {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.4;
+            pointer-events: none;
+            z-index: 50;
+            background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+        }
+
+        .news-card {
+            transition: transform 0.3s ease;
+        }
+        .news-card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body class="relative">
+    <div class="doc-texture"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 w-full z-[100] px-6 py-6 flex justify-between items-center bg-[#fdfcf9]/80 backdrop-blur-sm">
+        <a href="rrmnhc_coming_soon.html" class="cinzel font-bold text-xs tracking-widest text-red-800">RRMNHC</a>
+        <div class="flex gap-8 text-xs uppercase tracking-widest font-medium opacity-70">
+            <a href="#" class="text-red-800">News</a>
+            <a href="rrmnhc_coming_soon.html#contact" class="hover:text-red-800 transition-colors">Contact Us</a>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="pt-32 pb-16 px-6 text-center">
+        <h1 class="text-5xl md:text-6xl font-bold text-[#1a1a1a] mb-4">Latest News</h1>
+        <div class="w-16 h-1 bg-red-800 mx-auto"></div>
+        <p class="mt-6 text-lg opacity-70 max-w-2xl mx-auto">Updates from the construction site, heritage discoveries, and community events.</p>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-6 pb-24">
+        
+        <!-- FEATURED POST -->
+        <article class="mb-20 bg-white border border-gray-200 shadow-sm overflow-hidden flex flex-col md:flex-row">
+            <div class="md:w-1/2 aspect-video md:aspect-auto bg-gray-200">
+                <!-- Placeholder for Featured Image -->
+                <div class="w-full h-full flex items-center justify-center text-gray-400 italic p-12 text-center">
+                    [Featured Image Placeholder]
+                </div>
+            </div>
+            <div class="md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
+                <span class="text-xs uppercase tracking-[0.2em] text-red-800 font-semibold mb-4">Construction Update</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 text-[#1a1a1a]">A Milestone at 335 Main Street</h2>
+                <p class="text-lg opacity-80 mb-8 leading-relaxed">
+                    We are pleased to announce that the structural framing for the main entrance is now complete. This marks a significant step towards our 2027 opening goal...
+                </p>
+                <div class="flex justify-between items-center mt-auto">
+                    <span class="text-sm text-gray-500 italic">April 05, 2026</span>
+                    <a href="#" class="text-sm uppercase tracking-widest font-bold border-b-2 border-red-800 pb-1 hover:text-red-800 transition-colors">Read Story</a>
+                </div>
+            </div>
+        </article>
+
+        <!-- NEWS GRID -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            
+            <!-- Article 1 -->
+            <article class="news-card bg-white border border-gray-200 shadow-sm flex flex-col">
+                <div class="aspect-video bg-gray-200">
+                    <div class="w-full h-full flex items-center justify-center text-gray-400 italic p-6 text-center text-xs">
+                        [Article Image]
+                    </div>
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <span class="text-[10px] uppercase tracking-[0.2em] text-red-800 font-semibold mb-2">Heritage</span>
+                    <h3 class="text-xl font-bold mb-3 text-[#1a1a1a] leading-tight">Uncovering the Shoebox: New Finds</h3>
+                    <p class="text-sm opacity-70 mb-6 flex-grow">Recent community submissions have brought in extraordinary items from the St. Laurent region...</p>
+                    <div class="flex justify-between items-center text-[11px] text-gray-500 uppercase tracking-widest">
+                        <span>March 28, 2026</span>
+                        <a href="#" class="font-bold text-red-800">View</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Article 2 -->
+            <article class="news-card bg-white border border-gray-200 shadow-sm flex flex-col">
+                <div class="aspect-video bg-gray-200">
+                    <div class="w-full h-full flex items-center justify-center text-gray-400 italic p-6 text-center text-xs">
+                        [Article Image]
+                    </div>
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <span class="text-[10px] uppercase tracking-[0.2em] text-red-800 font-semibold mb-2">Community</span>
+                    <h3 class="text-xl font-bold mb-3 text-[#1a1a1a] leading-tight">Digital Scanning Appointments Open</h3>
+                    <p class="text-sm opacity-70 mb-6 flex-grow">Citizens are invited to book appointments to have their family heirlooms professionally scanned...</p>
+                    <div class="flex justify-between items-center text-[11px] text-gray-500 uppercase tracking-widest">
+                        <span>March 15, 2026</span>
+                        <a href="#" class="font-bold text-red-800">View</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Article 3 -->
+            <article class="news-card bg-white border border-gray-200 shadow-sm flex flex-col">
+                <div class="aspect-video bg-gray-200">
+                    <div class="w-full h-full flex items-center justify-center text-gray-400 italic p-6 text-center text-xs">
+                        [Article Image]
+                    </div>
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <span class="text-[10px] uppercase tracking-[0.2em] text-red-800 font-semibold mb-2">Exhibits</span>
+                    <h3 class="text-xl font-bold mb-3 text-[#1a1a1a] leading-tight">Artist Spotlight: Tracy Charette Fehr</h3>
+                    <p class="text-sm opacity-70 mb-6 flex-grow">A deep dive into the collaborative installations planned for the Virtual Great Hall...</p>
+                    <div class="flex justify-between items-center text-[11px] text-gray-500 uppercase tracking-widest">
+                        <span>Feb 22, 2026</span>
+                        <a href="#" class="font-bold text-red-800">View</a>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </main>
+
+    <div class="beadwork-divider"></div>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 text-center opacity-60">
+        <p class="cinzel text-sm tracking-widest mb-2">335 Main Street, Winnipeg, MB</p>
+        <p class="text-xs">&copy; 2026 Red River Métis National Heritage Centre. All Rights Reserved.</p>
+    </footer>
+
+
+<div style="text-align:center; padding: 20px; border-top: 1px solid #8B0000; margin-top: 40px;">
+<a href="design-system/rrmnhc_design_spec_showcase.html" style="color: #8B0000; text-decoration: none; font-family: serif;">View Design System Specs</a>
+</div>
+</body>
+</html>
