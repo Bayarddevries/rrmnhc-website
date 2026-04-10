@@ -1,5 +1,6 @@
 /* RRMNHC DESIGN SYSTEM - MASTER TOKENS */
 :root {
+    --rrmnhc-subtle-blue: #9ac6e0;  /* subtle blue for nav */
     /* --- COLOR PALETTE --- */
     --rrmnhc-crimson: #8b0000;
     --rrmnhc-crimson-light: #b30000;
@@ -98,4 +99,14 @@ h1, h2, h3, .serif { font-family: var(--font-serif); }
     pointer-events: none;
     z-index: 50;
     background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+}
+
+
+.navbar {
+    background-color: var(--rrmnhc-subtle-blue);
+    border-bottom: 1px solid var(--rrmnhc-border);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    /* Ensure translucency for a glass look */
+    opacity: 0.9;
 }
