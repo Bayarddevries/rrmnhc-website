@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RRMNHC | Reader Rail Prototype</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        body { 
+            background-color: #1a1a1a; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            margin: 0; 
+            overflow: hidden; 
+        }
+        
+        /* Tablet Frame simulation */
+        .tablet-frame {
+            width: 1024px; 
+            height: 768px;
+            background: #000; 
+            border: 20px solid #333;
+            border-radius: 40px; 
+            box-shadow: 0 50px 100px rgba(0,0,0,0.5);
+            position: relative; 
+            overflow: hidden;
+        }
+        .screen { 
+            width: 100%; 
+            height: 100%; 
+            background: var(--rrmnhc-parchment); 
+            position: relative; 
+            overflow-y: auto;
+        }
+        
+        /* Mode Styles */
+        .mode-section { display: none; height: 100%; width: 100%; position: relative; }
+        .mode-section.active { display: block; }
+        
+        /* Hero Mode */
+        .hero-bg { 
+            position: absolute; top:0; left:0; width:100%; height:100%; 
+            background-size: cover; background-position: center; 
+            filter: brightness(0.6); z-index: 1;
+        }
+        .hero-content { 
+            position: relative; z-index: 10; height: 100%; 
+            display: flex; flex-direction: column; justify-content: center; 
+            align-items: center; text-align: center; padding: 4rem; color: white;
+        }
+        
+        /* Narrative Mode */
+        .narrative-container { display: grid; grid-template-columns: 1fr 1fr; height: 100%; }
+        .narrative-image { height: 100%; background-size: cover; background-position: center; }
+        .narrative-text { padding: 4rem; display: flex; flex-direction: column; justify-content: center; background: var(--rrmnhc-parchment); }
+        
+        /* Snippet Mode */
+        .snippet-container { display: grid; grid-template-columns: 1.5fr 1fr; height: 100%; }
+        .snippet-map { background: #ddd; position: relative; }
+        .snippet-info { padding: 3rem; background: var(--rrmnhc-white); border-left: 1px solid var(--rrmnhc-border); }
+
+        .audio-btn {
+            cursor: pointer; transition: all 0.2s;
+            display: flex; align-items: center; gap: 10px;
+            font-family: var(--font-cinzel);
+            text-transform: uppercase; letter-spacing: 0.1em;
+        }
+        .audio-btn:hover { transform: scale(1.05); opacity: 0.8; }
+        
+        .mode-switcher {
+            position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+            z-index: 100; display: flex; gap: 10px; background: rgba(0,0,0,0.5);
+            padding: 10px; border-radius: 50px; backdrop-filter: blur(10px);
+        }
+        .mode-btn {
+            padding: 8px 20px; border-radius: 20px; background: transparent;
+            color: white; font-size: 12px; cursor: pointer; border: 1px solid rgba(255,255,255,0.3);
+            transition: all 0.2s;
+        }
+        .mode-btn.active { background: var(--rrmnhc-crimson); border-color: var(--rrmnhc-crimson); }
+    </style>
+</head>
+<body>
+
+    <div class="tablet-frame">
+        <div class="screen">
+            
+            <!-- MODE: HERO (Louis Riel) -->
+            <section id="mode-hero" class="mode-section active">
+                <div class="hero-bg" style="background-image: url('../assets/img/voices/riel_portrait.jpg');"></div>
+                <div class="hero-content">
+                    <h2 class="text-2xl uppercase tracking-widest mb-6 opacity-80 cinzel">Louis Riel</h2>
+                    <p class="text-5xl font-bold serif italic mb-12 leading-tight max-w-4xl">
+                        "My people will sleep for one hundred years, but when they awake, it will be the artists who give them their spirit back."
+                    </p>
+                    <button onclick="playAudio('riel')" class="audio-btn bg-white text-black px-8 py-4 rounded-full font-bold shadow-2xl">
+                        <span>🔊</span> Play Voice
+                    </button>
+                </div>
+            </section>
+
+            <!-- MODE: NARRATIVE (Maria Campbell) -->
+            <section id="mode-narrative" class="mode-section">
+                <div class="narrative-container">
+                    <div class="narrative-image" style="background-image: url('../assets/img/voices/campbell_portrait.jpg');"></div>
+                    <div class="narrative-text">
+                        <h2 class="text-3xl font-bold mb-4 serif text-red-800">Maria Campbell</h2>
+                        <p class="text-lg opacity-70 mb-8 leading-relaxed">
+                            In her seminal work 'Halfbreed', Campbell explores the profound isolation of living between two worlds, challenging the systemic erasure of Métis identity.
+                        </p>
+                        <p class="text-3xl font-bold serif italic mb-12 leading-tight">
+                            "I was a halfbreed, and that meant I was nothing. I was not white, and I was not Indian."
+                        </p>
+                        <button onclick="playAudio('campbell')" class="audio-btn btn-primary w-max px-8 py-4 rounded-sm font-bold shadow-lg">
+                            <span>🔊</span> Listen to the Narrative
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- MODE: SNIPPET (Gabriel Dumont) -->
+            <section id="mode-snippet" class="mode-section">
+                <div class="snippet-container">
+                    <div class="snippet-map flex items-center justify-center text-gray-400 italic p-12 text-center">
+                        <div class="text-center">
+                            <div class="w-32 h-32 bg-gray-300 rounded-full mx-auto mb-4 border-4 border-white shadow-lg overflow-hidden">
+                                <img src="../assets/img/voices/dumont_portrait.jpg" class="w-full h-full object-cover">
+                            </div>
+                            <p class="cincel text-sm tracking-widest font-bold text-gray-600">BATOCHE, SASKATCHEWAN</p>
+                            <p class="text-xs mt-2">Map Snippet: 1885 Resistance Coordinates</p>
+                        </div>
+                    </div>
+                    <div class="snippet-info flex flex-col justify-center">
+                        <h2 class="text-2xl font-bold mb-4 serif text-red-800">Gabriel Dumont</h2>
+                        <p class="text-xl font-bold serif italic mb-8 leading-tight">
+                            "Tant que nous aurons une goutte de sang français et indien..."
+                        </p>
+                        <p class="text-sm opacity-60 mb-8 leading-relaxed">
+                            As a master scout and military strategist, Dumont's identity was forged in the fusion of two cultures.
+                        </p>
+                        <button onclick="playAudio('dumont')" class="audio-btn border-2 border-red-800 text-red-800 px-6 py-3 rounded-sm font-bold hover:bg-red-800 hover:text-white transition-all">
+                            <span>🔊</span> Play Audio
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- MODE SWITCHER -->
+            <div class="mode-switcher">
+                <button onclick="setMode('hero')" id="btn-hero" class="mode-btn active">Hero Mode</button>
+                <button onclick="setMode('narrative')" id="btn-narrative" class="mode-btn">Narrative Mode</button>
+                <button onclick="setMode('snippet')" id="btn-snippet" class="mode-btn">Snippet Mode</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function setMode(mode) {
+            document.querySelectorAll('.mode-section').forEach(s => s.classList.remove('active'));
+            document.getElementById('mode-' + mode).classList.add('active');
+            document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('btn-' + mode).classList.add('active');
+        }
+
+        function playAudio(person) {
+            const audioMap = {
+                'riel': '../assets/audio/voices/riel_prophetic.ogg',
+                'campbell': '../assets/audio/voices/campbell_identity.ogg',
+                'dumont': '../assets/audio/voices/dumont_identity.ogg'
+            };
+            const audio = new Audio(audioMap[person]);
+            audio.play();
+        }
+    </script>
+</body>
+</html>
