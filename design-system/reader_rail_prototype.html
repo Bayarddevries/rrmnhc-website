@@ -20,16 +20,13 @@
             overflow: hidden; 
         }
         
-        /* HIGH-FIDELITY TABLET BEZEL */
+        /* Tablet Bezel */
         .device-bezel {
             width: 1024px; height: 768px;
             background: linear-gradient(145deg, #222, #000);
             border: 12px solid #111;
             border-radius: 50px; 
-            box-shadow: 
-                0 0 0 2px #333,
-                0 50px 100px rgba(0,0,0,0.9),
-                inset 0 0 20px rgba(255,255,255,0.1);
+            box-shadow: 0 50px 100px rgba(0,0,0,0.9);
             position: relative; 
             padding: 10px;
         }
@@ -39,169 +36,135 @@
             border-radius: 35px;
             position: relative; 
             overflow: hidden;
-            box-shadow: inset 0 0 100px rgba(0,0,0,0.1);
         }
         
-        /* GLOBAL LIGHTING OVERLAY */
-        .screen-glare {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.15) 0%, transparent 50%);
-            pointer-events: none; z-index: 100;
+        /* UI Layout */
+        .interface-container {
+            display: flex; flex-direction: column; height: 100%; width: 100%;
         }
 
-        /* VIEW LOGIC */
-        .view-container { 
-            display: none; height: 100%; width: 100%; 
-            position: absolute; top: 0; left: 0; 
-            animation: slideIn 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        /* Top Selection Bar */
+        .name-selector {
+            display: flex; justify-content: center; gap: 40px;
+            padding: 40px 0; border-bottom: 1px solid var(--rrmnhc-border);
+            background: rgba(0,0,0,0.03);
         }
-        .view-container.active { display: flex; }
-        @keyframes slideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .name-btn {
+            font-family: var(--font-cinzel); text-transform: uppercase;
+            letter-spacing: 0.2em; font-size: 14px; cursor: pointer;
+            transition: 0.3s; color: #888;
+        }
+        .name-btn.active { color: var(--rrmnhc-crimson); font-weight: 700; }
 
-        /* --- MODE 1: THE MONUMENT (Louis Riel) --- */
-        .view-hero { flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; }
-        .hero-bg { 
-            position: absolute; top:0; left:0; width:100%; height:100%; 
-            background-size: cover; background-position: center; 
-            filter: brightness(0.4) saturate(0.8); z-index: 1;
+        /* Main Content Area */
+        .content-area {
+            display: grid; grid-template-columns: 1fr 1.2fr; 
+            flex-grow: 1; align-items: center; padding: 0 60px;
+            gap: 60px;
         }
-        .hero-content { position: relative; z-index: 10; padding: 4rem; max-width: 900px; }
-        .hero-quote { 
-            font-size: 4rem; line-height: 1.1; margin-bottom: 3rem;
-            text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        .portrait-frame {
+            width: 100%; aspect-ratio: 1/1;
+            border: 1px solid var(--rrmnhc-border); padding: 20px;
+            background: var(--rrmnhc-white); box-shadow: var(--shadow-md);
         }
+        .portrait-img {
+            width: 100%; height: 100%; object-fit: cover;
+            filter: grayscale(0.1);
+        }
+        .text-frame { display: flex; flex-direction: column; justify-content: center; }
 
-        /* --- MODE 2: THE CHRONICLE (Maria Campbell) --- */
-        .view-chronicle { flex-direction: row; }
-        .chronicle-image { width: 40%; height: 100%; background-size: cover; background-position: center; filter: grayscale(0.2); }
-        .chronicle-text { 
-            width: 60%; padding: 6rem 5rem; 
-            display: flex; flex-direction: column; justify-content: center; 
-            background: var(--rrmnhc-parchment);
+        /* Audio Trigger */
+        .audio-trigger {
+            margin-top: 3rem; display: inline-flex; align-items: center; gap: 15px;
+            font-family: var(--font-cinzel); font-weight: 700; color: var(--rrmnhc-crimson);
+            cursor: pointer; transition: 0.3s; width: max-content;
+            text-transform: uppercase; letter-spacing: 0.1em; font-size: 14px;
         }
+        .audio-trigger:hover { transform: translateX(10px); opacity: 0.8; }
 
-        /* --- MODE 3: THE FIELD NOTE (Gabriel Dumont) --- */
-        .view-field { flex-direction: row; }
-        .field-map { width: 55%; height: 100%; background: var(--rrmnhc-cream); display: flex; align-items: center; justify-content: center; }
-        .field-card { 
-            width: 45%; height: 100%; padding: 4rem; 
-            background: var(--rrmnhc-white); border-left: 1px solid var(--rrmnhc-border);
-            display: flex; flex-direction: column; justify-content: center;
-        }
-        .field-portrait { 
-            width: 160px; height: 160px; border-radius: 50%; 
-            border: 6px solid white; box-shadow: var(--shadow-md);
-            object-fit: cover; margin: 0 auto 2rem auto;
-        }
-
-        /* MUSEUM-GRADE UI ELEMENTS */
-        .museum-trigger {
-            cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            display: inline-flex; align-items: center; gap: 12px;
-            font-family: var(--font-cinzel); font-weight: 700;
-            text-transform: uppercase; letter-spacing: 0.2em;
-            font-size: 12px;
-        }
-        .museum-trigger:hover { opacity: 0.7; transform: scale(1.02); }
-        
-        .mode-nav {
-            position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
-            z-index: 110; display: flex; gap: 30px; 
-            padding: 15px 40px; border-radius: 100px; 
-            background: rgba(0,0,0,0.8); backdrop-filter: blur(15px);
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        .nav-item {
-            color: rgba(255,255,255,0.4); font-size: 10px; 
-            text-transform: uppercase; letter-spacing: 0.2em; 
-            cursor: pointer; transition: 0.3s; font-family: var(--font-cinzel);
-        }
-        .nav-item.active { color: var(--rrmnhc-crimson); text-shadow: 0 0 10px var(--rrmnhc-crimson); }
+        .doc-texture { position: absolute; top:0; left:0; width:100%; height:100%; pointer-events: none; z-index: 5; }
     </style>
 </head>
 <body>
 
     <div class="device-bezel">
         <div class="glass-screen">
-            <div class="screen-glare"></div>
             <div class="doc-texture"></div>
 
-            <!-- VIEW 1: THE MONUMENT -->
-            <div id="view-hero" class="view-container active view-hero">
-                <div class="hero-bg" style="background-image: url('../assets/img/voices/riel_portrait.jpg');"></div>
-                <div class="hero-content">
-                    <h2 class="text-xl uppercase tracking-[0.4em] mb-8 opacity-60 cinzel">The Visionary</h2>
-                    <p class="text-6xl font-bold serif italic mb-12 leading-tight">
-                        "My people will sleep for one hundred years, but when they awake, it will be the artists who give them their spirit back."
-                    </p>
-                    <div onclick="playAudio('riel')" class="audio-trigger museum-trigger text-white">
-                        <span class="text-xl">🔊</span> Listen to Louis Riel
-                    </div>
+            <div class="interface-container">
+                <!-- NAME SELECTOR -->
+                <div class="name-selector">
+                    <span onclick="updatePerson('riel')" id="btn-riel" class="name-btn active">Louis Riel</span>
+                    <span onclick="updatePerson('campbell')" id="btn-campbell" class="name-btn">Maria Campbell</span>
+                    <span onclick="updatePerson('dumont')" id="btn-dumont" class="name-btn">Gabriel Dumont</span>
                 </div>
-            </div>
 
-            <!-- VIEW 2: THE CHRONICLE -->
-            <div id="view-chronicle" class="view-container view-chronicle">
-                <div class="chronicle-image" style="background-image: url('../assets/img/voices/campbell_portrait.jpg');"></div>
-                <div class="chronicle-content">
-                    <h2 class="text-sm uppercase tracking-widest mb-2 opacity-50 cinzel">The Truth Teller</h2>
-                    <h3 class="text-5xl font-bold mb-8 serif text-red-800">Maria Campbell</h3>
-                    <p class="text-xl opacity-70 mb-10 leading-relaxed font-light italic">
-                        "I was a halfbreed, and that meant I was nothing. I was not white, and I was not Indian."
-                    </p>
-                    <div onclick="playAudio('campbell')" class="audio-trigger museum-trigger text-red-800">
-                        <span class="text-xl">🔊</span> Listen to Narrative
+                <!-- MAIN CONTENT -->
+                <div class="content-area">
+                    <div class="portrait-frame">
+                        <img id="person-image" src="../assets/img/voices/riel_portrait.jpg" class="portrait-img">
+                    </div>
+                    <div class="text-frame">
+                        <h2 id="person-name" class="text-4xl font-bold mb-6 serif text-red-800 cinzel">Louis Riel</h2>
+                        <p id="person-quote" class="text-3xl font-bold serif italic mb-8 leading-tight text-gray-800">
+                            "My people will sleep for one hundred years, but when they awake, it will be the artists who give them their spirit back."
+                        </p>
+                        <p id="person-source" class="text-lg opacity-60 mb-10 leading-relaxed">
+                            The visionary leader and founder of the Métis Provisional Government.
+                        </p>
+                        <div onclick="playAudio()" class="audio-trigger">
+                            <span class="text-2xl">🔊</span> Listen to Voice
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- VIEW 3: THE FIELD NOTE -->
-            <div id="view-field" class="view-container view-field">
-                <div class="field-map flex items-center justify-center">
-                     <div class="text-center">
-                        <img src="../assets/img/voices/dumont_portrait.jpg" class="field-portrait">
-                        <p class="cinzel text-md tracking-widest font-bold text-gray-800">Gabriel Dumont</p>
-                        <p class="text-xs mt-1 opacity-50 uppercase tracking-tighter">Batoche, Saskatchewan</p>
-                    </div>
-                </div>
-                <div class="field-card">
-                    <h2 class="text-sm uppercase tracking-widest mb-4 opacity-50 cinzel">Tactical Account</h2>
-                    <p class="text-2xl font-bold serif italic mb-8 leading-tight text-gray-800">
-                        "Tant que nous aurons une goutte de sang français et indien..."
-                    </p>
-                    <p class="text-base opacity-60 mb-12 leading-relaxed">
-                        As a master scout and military strategist, Dumont's identity was forged in the fusion of two cultures.
-                    </p>
-                    <div onclick="playAudio('dumont')" class="audio-trigger museum-trigger text-red-800">
-                        <span class="text-xl">🔊</span> Play Voice
-                    </div>
-                </div>
-            </div>
-
-            <!-- MODE SELECTOR -->
-            <div class="mode-nav">
-                <span onclick="setMode('hero')" id="btn-hero" class="nav-item active">Monument</span>
-                <span onclick="setMode('chronicle')" id="btn-chronicle" class="nav-item">Chronicle</span>
-                <span onclick="setMode('field')" id="btn-field" class="nav-item">Field Note</span>
             </div>
         </div>
     </div>
 
     <script>
-        function setMode(mode) {
-            document.querySelectorAll('.view-container').forEach(v => v.classList.remove('active'));
-            document.getElementById('view-' + mode).classList.add('active');
-            document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
-            document.getElementById('btn-' + mode).classList.add('active');
+        const people = {
+            riel: {
+                name: "Louis Riel",
+                quote: '"My people will sleep for one hundred years, but when they awake, it will be the artists who give them their spirit back."',
+                source: "The visionary leader and founder of the Métis Provisional Government.",
+                image: "../assets/img/voices/riel_portrait.jpg",
+                audio: "../assets/audio/voices/riel_prophetic.ogg"
+            },
+            campbell: {
+                name: "Maria Campbell",
+                quote: '"I was a halfbreed, and that meant I was nothing. I was not white, and I was not Indian."',
+                source: "Author of 'Halfbreed', exploring the erasure of Métis identity.",
+                image: "../assets/img/voices/campbell_portrait.jpg",
+                audio: "../assets/audio/voices/campbell_identity.ogg"
+            },
+            dumont: {
+                name: "Gabriel Dumont",
+                quote: '"Tant que nous aurons une goutte de sang français et indien..."',
+                source: "The master scout and military strategist of the 1885 Resistance.",
+                image: "../assets/img/voices/dumont_portrait.jpg",
+                audio: "../assets/audio/voices/dumont_identity.ogg"
+            }
+        };
+
+        let currentPerson = 'riel';
+
+        function updatePerson(id) {
+            currentPerson = id;
+            const data = people[id];
+            
+            // Update Content
+            document.getElementById('person-name').innerText = data.name;
+            document.getElementById('person-quote').innerText = data.quote;
+            document.getElementById('person-source').innerText = data.source;
+            document.getElementById('person-image').src = data.image;
+
+            // Update Navigation Buttons
+            document.querySelectorAll('.name-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('btn-' + id).classList.add('active');
         }
 
-        function playAudio(person) {
-            const audioMap = {
-                'riel': '../assets/audio/voices/riel_prophetic.ogg',
-                'campbell': '../assets/audio/voices/campbell_identity.ogg',
-                'dumont': '../assets/audio/voices/dumont_identity.ogg'
-            };
-            const audio = new Audio(audioMap[person]);
+        function playAudio() {
+            const audio = new Audio(people[currentPerson].audio);
             audio.play();
         }
     </script>
