@@ -18,52 +18,66 @@
             min-height: 100vh; 
             margin: 0; 
             overflow: hidden; 
+            font-family: var(--font-sans);
         }
         
-        /* Tablet Frame simulation */
         .tablet-frame {
-            width: 1024px; 
-            height: 768px;
-            background: #000; 
-            border: 20px solid #333;
-            border-radius: 40px; 
-            box-shadow: 0 50px 100px rgba(0,0,0,0.5);
+            width: 1024px; height: 768px;
+            background: #000; border: 20px solid #333;
+            border-radius: 40px; box-shadow: 0 50px 100px rgba(0,0,0,0.5);
+            position: relative; overflow: hidden;
+        }
+        .screen { 
+            width: 100%; height: 100%; 
+            background: var(--rrmnhc-parchment); 
             position: relative; 
             overflow: hidden;
         }
-        .screen { 
-            width: 100%; 
+        
+        /* Unified Mode Structure */
+        .mode-section { 
+            display: none; 
             height: 100%; 
-            background: var(--rrmnhc-parchment); 
-            position: relative; 
-            overflow-y: auto;
+            width: 100%; 
+            position: relative;
+            animation: fadeIn 0.4s ease-out;
         }
-        
-        /* Mode Styles */
-        .mode-section { display: none; height: 100%; width: 100%; position: relative; }
-        .mode-section.active { display: block; }
-        
-        /* Hero Mode */
+        .mode-section.active { display: flex; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Hero Mode Specifics */
+        .hero-mode { flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; }
         .hero-bg { 
             position: absolute; top:0; left:0; width:100%; height:100%; 
             background-size: cover; background-position: center; 
-            filter: brightness(0.6); z-index: 1;
+            filter: brightness(0.5); z-index: 1;
         }
-        .hero-content { 
-            position: relative; z-index: 10; height: 100%; 
-            display: flex; flex-direction: column; justify-content: center; 
-            align-items: center; text-align: center; padding: 4rem; color: white;
+        .hero-content { position: relative; z-index: 10; padding: 4rem; }
+        
+        /* Narrative & Snippet Base Layout */
+        .standard-layout { display: grid; grid-template-columns: 1fr 1fr; height: 100%; }
+        .standard-visual { height: 100%; background-size: cover; background-position: center; z-index: 1; }
+        .standard-text { 
+            padding: 4rem; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            background: var(--rrmnhc-parchment); 
+            z-index: 10;
+            position: relative;
         }
-        
-        /* Narrative Mode */
-        .narrative-container { display: grid; grid-template-columns: 1fr 1fr; height: 100%; }
-        .narrative-image { height: 100%; background-size: cover; background-position: center; }
-        .narrative-text { padding: 4rem; display: flex; flex-direction: column; justify-content: center; background: var(--rrmnhc-parchment); }
-        
-        /* Snippet Mode */
-        .snippet-container { display: grid; grid-template-columns: 1.5fr 1fr; height: 100%; }
-        .snippet-map { background: #ddd; position: relative; }
-        .snippet-info { padding: 3rem; background: var(--rrmnhc-white); border-left: 1px solid var(--rrmnhc-border); }
+
+        /* Snippet Specifics */
+        .snippet-mode { grid-template-columns: 1fr 1fr; }
+        .snippet-visual { 
+            display: flex; align-items: center; justify-content: center; 
+            background: var(--rrmnhc-cream); height: 100%;
+        }
+        .snippet-portrait { 
+            width: 300px; height: 300px; border-radius: 50%; 
+            border: 8px solid white; box-shadow: var(--shadow-md);
+            object-fit: cover;
+        }
 
         .audio-btn {
             cursor: pointer; transition: all 0.2s;
@@ -75,7 +89,7 @@
         
         .mode-switcher {
             position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
-            z-index: 100; display: flex; gap: 10px; background: rgba(0,0,0,0.5);
+            z-index: 100; display: flex; gap: 10px; background: rgba(0,0,0,0.6);
             padding: 10px; border-radius: 50px; backdrop-filter: blur(10px);
         }
         .mode-btn {
@@ -90,64 +104,59 @@
 
     <div class="tablet-frame">
         <div class="screen">
+            <div class="doc-texture"></div>
             
             <!-- MODE: HERO (Louis Riel) -->
-            <section id="mode-hero" class="mode-section active">
+            <section id="mode-hero" class="mode-section active hero-mode">
                 <div class="hero-bg" style="background-image: url('../assets/img/voices/riel_portrait.jpg');"></div>
                 <div class="hero-content">
                     <h2 class="text-2xl uppercase tracking-widest mb-6 opacity-80 cinzel">Louis Riel</h2>
-                    <p class="text-5xl font-bold serif italic mb-12 leading-tight max-w-4xl">
+                    <p class="text-6xl font-bold serif italic mb-12 leading-tight max-w-4xl">
                         "My people will sleep for one hundred years, but when they awake, it will be the artists who give them their spirit back."
                     </p>
-                    <button onclick="playAudio('riel')" class="audio-btn bg-white text-black px-8 py-4 rounded-full font-bold shadow-2xl">
+                    <button onclick="playAudio('riel')" class="audio-btn bg-white text-black px-10 py-5 rounded-full font-bold shadow-2xl">
                         <span>🔊</span> Play Voice
                     </button>
                 </div>
             </section>
 
             <!-- MODE: NARRATIVE (Maria Campbell) -->
-            <section id="mode-narrative" class="mode-section">
-                <div class="narrative-container">
-                    <div class="narrative-image" style="background-image: url('../assets/img/voices/campbell_portrait.jpg');"></div>
-                    <div class="narrative-text">
-                        <h2 class="text-3xl font-bold mb-4 serif text-red-800">Maria Campbell</h2>
-                        <p class="text-lg opacity-70 mb-8 leading-relaxed">
-                            In her seminal work 'Halfbreed', Campbell explores the profound isolation of living between two worlds, challenging the systemic erasure of Métis identity.
-                        </p>
-                        <p class="text-3xl font-bold serif italic mb-12 leading-tight">
-                            "I was a halfbreed, and that meant I was nothing. I was not white, and I was not Indian."
-                        </p>
-                        <button onclick="playAudio('campbell')" class="audio-btn btn-primary w-max px-8 py-4 rounded-sm font-bold shadow-lg">
-                            <span>🔊</span> Listen to the Narrative
-                        </button>
-                    </div>
+            <section id="mode-narrative" class="mode-section standard-layout">
+                <div class="standard-visual" style="background-image: url('../assets/img/voices/campbell_portrait.jpg');"></div>
+                <div class="standard-text">
+                    <h2 class="text-4xl font-bold mb-4 serif text-red-800">Maria Campbell</h2>
+                    <p class="text-lg opacity-70 mb-8 leading-relaxed">
+                        In her seminal work 'Halfbreed', Campbell explores the profound isolation of living between two worlds, challenging the systemic erasure of Métis identity.
+                    </p>
+                    <p class="text-3xl font-bold serif italic mb-12 leading-tight">
+                        "I was a halfbreed, and that meant I was nothing. I was not white, and I was not Indian."
+                    </p>
+                    <button onclick="playAudio('campbell')" class="audio-btn btn-primary w-max px-10 py-5 rounded-sm font-bold shadow-lg">
+                        <span>🔊</span> Listen to the Narrative
+                    </button>
                 </div>
             </section>
 
             <!-- MODE: SNIPPET (Gabriel Dumont) -->
-            <section id="mode-snippet" class="mode-section">
-                <div class="snippet-container">
-                    <div class="snippet-map flex items-center justify-center text-gray-400 italic p-12 text-center">
-                        <div class="text-center">
-                            <div class="w-32 h-32 bg-gray-300 rounded-full mx-auto mb-4 border-4 border-white shadow-lg overflow-hidden">
-                                <img src="../assets/img/voices/dumont_portrait.jpg" class="w-full h-full object-cover">
-                            </div>
-                            <p class="cincel text-sm tracking-widest font-bold text-gray-600">BATOCHE, SASKATCHEWAN</p>
-                            <p class="text-xs mt-2">Map Snippet: 1885 Resistance Coordinates</p>
-                        </div>
+            <section id="mode-snippet" class="mode-section standard-layout">
+                <div class="snippet-visual">
+                    <div class="text-center">
+                        <img src="../assets/img/voices/dumont_portrait.jpg" class="snippet-portrait mb-6">
+                        <p class="cinzel text-sm tracking-widest font-bold text-gray-600">BATOCHE, SASKATCHEWAN</p>
+                        <p class="text-xs mt-2 opacity-60">Map Snippet: 1885 Resistance Coordinates</p>
                     </div>
-                    <div class="snippet-info flex flex-col justify-center">
-                        <h2 class="text-2xl font-bold mb-4 serif text-red-800">Gabriel Dumont</h2>
-                        <p class="text-xl font-bold serif italic mb-8 leading-tight">
-                            "Tant que nous aurons une goutte de sang français et indien..."
-                        </p>
-                        <p class="text-sm opacity-60 mb-8 leading-relaxed">
-                            As a master scout and military strategist, Dumont's identity was forged in the fusion of two cultures.
-                        </p>
-                        <button onclick="playAudio('dumont')" class="audio-btn border-2 border-red-800 text-red-800 px-6 py-3 rounded-sm font-bold hover:bg-red-800 hover:text-white transition-all">
-                            <span>🔊</span> Play Audio
-                        </button>
-                    </div>
+                </div>
+                <div class="standard-text">
+                    <h2 class="text-4xl font-bold mb-4 serif text-red-800">Gabriel Dumont</h2>
+                    <p class="text-3xl font-bold serif italic mb-8 leading-tight">
+                        "Tant que nous aurons une goutte de sang français et indien..."
+                    </p>
+                    <p class="text-lg opacity-70 mb-12 leading-relaxed">
+                        As a master scout and military strategist, Dumont's identity was forged in the fusion of two cultures.
+                    </p>
+                    <button onclick="playAudio('dumont')" class="audio-btn border-2 border-red-800 text-red-800 px-10 py-5 rounded-sm font-bold hover:bg-red-800 hover:text-white transition-all">
+                        <span>🔊</span> Play Audio
+                    </button>
                 </div>
             </section>
 
