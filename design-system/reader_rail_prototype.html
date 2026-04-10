@@ -2,16 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RRMNHC | Reader Rail Prototype</title>
+    <meta name="viewport" content="width=device\width, initial-scale=1.0">
+    <title>RRMNHC | Reader Rail Prototype (Clean Slate)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
     <style>
+        /* Resetting the simulation environment */
         body { 
-            background-color: #1a1a1a; 
+            background-color: #121212; 
             display: flex; 
             justify-content: center; 
             align-items: center; 
@@ -21,159 +22,159 @@
             font-family: var(--font-sans);
         }
         
-        .tablet-frame {
-            width: 1024px; height: 768px;
-            background: #000; border: 20px solid #333;
-            border-radius: 40px; box-shadow: 0 50px 100px rgba(0,0,0,0.5);
-            position: relative; overflow: hidden;
+        /* The Tablet Device */
+        .tablet-container {
+            width: 1024px; 
+            height: 768px;
+            background: #1a1a1a; 
+            border: 16px solid #2a2a2a;
+            border-radius: 48px; 
+            box-shadow: 0 100px 150px rgba(0,0,0,0.8);
+            position: relative; 
+            overflow: hidden;
         }
-        .screen { 
-            width: 100%; height: 100%; 
+        .tablet-screen { 
+            width: 100%; 
+            height: 100%; 
             background: var(--rrmnhc-parchment); 
             position: relative; 
             overflow: hidden;
         }
         
-        /* Unified Mode Structure */
-        .mode-section { 
-            display: none; 
-            height: 100%; 
-            width: 100%; 
-            position: relative;
-            animation: fadeIn 0.4s ease-out;
-        }
-        .mode-section.active { display: flex; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        /* Mode Visibility Logic */
+        .view-container { display: none; height: 100%; width: 100%; position: absolute; top: 0; left: 0; }
+        .view-container.active { display: flex; }
 
-        /* Hero Mode Specifics */
-        .hero-mode { flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; }
+        /* --- MODE 1: HERO (Cinematic/Monumental) --- */
+        .view-hero { flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; }
         .hero-bg { 
             position: absolute; top:0; left:0; width:100%; height:100%; 
             background-size: cover; background-position: center; 
-            filter: brightness(0.5); z-index: 1;
+            filter: brightness(0.4) contrast(1.1); z-index: 1;
         }
-        .hero-content { position: relative; z-index: 10; padding: 4rem; }
-        
-        /* Narrative & Snippet Base Layout */
-        .standard-layout { display: grid; grid-template-columns: 1fr 1fr; height: 100%; }
-        .standard-visual { height: 100%; background-size: cover; background-position: center; z-index: 1; }
-        .standard-text { 
-            padding: 4rem; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            background: var(--rrmnhc-parchment); 
-            z-index: 10;
-            position: relative;
+        .hero-content { position: relative; z-index: 10; padding: 4rem; max-width: 800px; }
+
+        /* --- MODE 2: CHRONICLE (Elegant/Monograph) --- */
+        .view-chronicle { flex-direction: row; }
+        .chronicle-image { width: 45%; height: 100%; background-size: cover; background-position: center; }
+        .chronicle-content { 
+            width: 55%; padding: 5rem 4rem; 
+            display: flex; flex-direction: column; justify-content: center; 
+            background: var(--rrmnhc-parchment);
         }
 
-        /* Snippet Specifics */
-        .snippet-mode { grid-template-columns: 1fr 1fr; }
-        .snippet-visual { 
-            display: flex; align-items: center; justify-content: center; 
-            background: var(--rrmnhc-cream); height: 100%;
+        /* --- MODE 3: FIELD NOTE (Tactical/Snippet) --- */
+        .view-field { flex-direction: row; }
+        .field-map { width: 60%; height: 100%; background: #e5e7eb; position: relative; overflow: hidden; }
+        .field-card { 
+            width: 40%; height: 100%; padding: 3rem; 
+            background: var(--rrmnhc-white); border-left: 1px solid var(--rrmnhc-border);
+            display: flex; flex-direction: column; justify-content: center;
         }
-        .snippet-portrait { 
-            width: 300px; height: 300px; border-radius: 50%; 
-            border: 8px solid white; box-shadow: var(--shadow-md);
+        .field-portrait { 
+            width: 120px; height: 120px; border-radius: 50%; 
+            border: 4px solid var(--rrmnhc-crimson); margin-bottom: 1.5rem;
             object-fit: cover;
         }
 
-        .audio-btn {
-            cursor: pointer; transition: all 0.2s;
-            display: flex; align-items: center; gap: 10px;
-            font-family: var(--font-cinzel);
-            text-transform: uppercase; letter-spacing: 0.1em;
+        /* Interface Elements */
+        .mode-selector {
+            position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+            z-index: 100; display: flex; gap: 12px; background: rgba(0,0,0,0.7);
+            padding: 12px 24px; border-radius: 100px; backdrop-filter: blur(12px);
         }
-        .audio-btn:hover { transform: scale(1.05); opacity: 0.8; }
-        
-        .mode-switcher {
-            position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
-            z-index: 100; display: flex; gap: 10px; background: rgba(0,0,0,0.6);
-            padding: 10px; border-radius: 50px; backdrop-filter: blur(10px);
+        .selector-btn {
+            color: rgba(255,255,255,0.6); font-size: 11px; text-transform: uppercase; 
+            letter-spacing: 0.1em; font-weight: 700; cursor: pointer; transition: 0.3s;
         }
-        .mode-btn {
-            padding: 8px 20px; border-radius: 20px; background: transparent;
-            color: white; font-size: 12px; cursor: pointer; border: 1px solid rgba(255,255,255,0.3);
-            transition: all 0.2s;
+        .selector-btn:hover { color: white; }
+        .selector-btn.active { color: var(--rrmnhc-crimson); }
+
+        .audio-trigger {
+            margin-top: 2rem; display: inline-flex; align-items: center; gap: 12px;
+            font-family: var(--font-cinzel); font-weight: 700; color: var(--rrmnhc-crimson);
+            cursor: pointer; transition: 0.2s;
         }
-        .mode-btn.active { background: var(--rrmnhc-crimson); border-color: var(--rrmnhc-crimson); }
+        .audio-trigger:hover { transform: translateY(-2px); }
     </style>
 </head>
 <body>
 
     <div class="tablet-frame">
-        <div class="screen">
+        <div class="tablet-screen">
             <div class="doc-texture"></div>
-            
-            <!-- MODE: HERO (Louis Riel) -->
-            <section id="mode-hero" class="mode-section active hero-mode">
+
+            <!-- MODE 1: HERO (Louis Riel) -->
+            <div id="view-hero" class="view-container active view-hero">
                 <div class="hero-bg" style="background-image: url('../assets/img/voices/riel_portrait.jpg');"></div>
                 <div class="hero-content">
-                    <h2 class="text-2xl uppercase tracking-widest mb-6 opacity-80 cinzel">Louis Riel</h2>
-                    <p class="text-6xl font-bold serif italic mb-12 leading-tight max-w-4xl">
+                    <h2 class="text-xl uppercase tracking-[0.3em] mb-4 opacity-70 cinzel">Louis Riel</h2>
+                    <p class="text-5xl font-bold serif italic mb-12 leading-tight">
                         "My people will sleep for one hundred years, but when they awake, it will be the artists who give them their spirit back."
                     </p>
-                    <button onclick="playAudio('riel')" class="audio-btn bg-white text-black px-10 py-5 rounded-full font-bold shadow-2xl">
-                        <span>🔊</span> Play Voice
+                    <button onclick="playAudio('riel')" class="audio-trigger">
+                        <span class="text-2xl">🔊</span> Listen to Voice
                     </button>
                 </div>
-            </section>
+            </div>
 
-            <!-- MODE: NARRATIVE (Maria Campbell) -->
-            <section id="mode-narrative" class="mode-section standard-layout">
-                <div class="standard-visual" style="background-image: url('../assets/img/voices/campbell_portrait.jpg');"></div>
-                <div class="standard-text">
-                    <h2 class="text-4xl font-bold mb-4 serif text-red-800">Maria Campbell</h2>
+            <!-- MODE 2: CHRONICLE (Maria Campbell) -->
+            <div id="view-chronicle" class="view-container view-chronicle">
+                <div class="chronicle-image" style="background-image: url('../assets/img/voices/campbell_portrait.jpg');"></div>
+                <div class="chronicle-content">
+                    <h2 class="text-4xl font-bold mb-6 serif text-red-800">Maria Campbell</h2>
                     <p class="text-lg opacity-70 mb-8 leading-relaxed">
                         In her seminal work 'Halfbreed', Campbell explores the profound isolation of living between two worlds, challenging the systemic erasure of Métis identity.
                     </p>
-                    <p class="text-3xl font-bold serif italic mb-12 leading-tight">
+                    <p class="text-2xl font-bold serif italic mb-12 leading-tight text-gray-800">
                         "I was a halfbreed, and that meant I was nothing. I was not white, and I was not Indian."
                     </p>
-                    <button onclick="playAudio('campbell')" class="audio-btn btn-primary w-max px-10 py-5 rounded-sm font-bold shadow-lg">
-                        <span>🔊</span> Listen to the Narrative
+                    <button onclick="playAudio('campbell')" class="audio-trigger">
+                        <span class="text-xl">🔊</span> Listen to Narrative
                     </button>
                 </div>
-            </section>
+            </div>
 
-            <!-- MODE: SNIPPET (Gabriel Dumont) -->
-            <section id="mode-snippet" class="mode-section standard-layout">
-                <div class="snippet-visual">
-                    <div class="text-center">
-                        <img src="../assets/img/voices/dumont_portrait.jpg" class="snippet-portrait mb-6">
+            <!-- MODE 3: FIELD NOTE (Gabriel Dumont) -->
+            <div id="view-field" class="view-container view-field">
+                <div class="field-map flex items-center justify-center">
+                     <div class="text-center">
+                        <div class="w-48 h-48 bg-gray-300 rounded-full mx-auto mb-4 border-4 border-white shadow-lg overflow-hidden">
+                            <img src="../assets/img/voices/dumont_portrait.jpg" class="w-full h-full object-cover">
+                        </div>
                         <p class="cinzel text-sm tracking-widest font-bold text-gray-600">BATOCHE, SASKATCHEWAN</p>
-                        <p class="text-xs mt-2 opacity-60">Map Snippet: 1885 Resistance Coordinates</p>
                     </div>
                 </div>
-                <div class="standard-text">
-                    <h2 class="text-4xl font-bold mb-4 serif text-red-800">Gabriel Dumont</h2>
-                    <p class="text-3xl font-bold serif italic mb-8 leading-tight">
+                <div class="field-card">
+                    <h2 class="text-2xl font-bold mb-2 serif text-red-800">Gabriel Dumont</h2>
+                    <div class="w-12 h-1 bg-red-800 mb-6"></div>
+                    <p class="text-lg font-bold serif italic mb-6 leading-tight">
                         "Tant que nous aurons une goutte de sang français et indien..."
                     </p>
-                    <p class="text-lg opacity-70 mb-12 leading-relaxed">
+                    <p class="text-sm opacity-60 mb-10 leading-relaxed">
                         As a master scout and military strategist, Dumont's identity was forged in the fusion of two cultures.
                     </p>
-                    <button onclick="playAudio('dumont')" class="audio-btn border-2 border-red-800 text-red-800 px-10 py-5 rounded-sm font-bold hover:bg-red-800 hover:text-white transition-all">
+                    <button onclick="playAudio('dumont')" class="audio-trigger">
                         <span>🔊</span> Play Audio
                     </button>
                 </div>
-            </section>
-
-            <!-- MODE SWITCHER -->
-            <div class="mode-switcher">
-                <button onclick="setMode('hero')" id="btn-hero" class="mode-btn active">Hero Mode</button>
-                <button onclick="setMode('narrative')" id="btn-narrative" class="mode-btn">Narrative Mode</button>
-                <button onclick="setMode('snippet')" id="btn-snippet" class="mode-btn">Snippet Mode</button>
             </div>
+
+            <!-- MODE SELECTOR -->
+            <div class="mode-switcher">
+                <span onclick="setMode('hero')" id="btn-hero" class="selector-btn active">Hero</span>
+                <span onclick="setMode('chronicle')" id="btn-chronicle" class="selector-btn">Chronicle</span>
+                <span onclick="setMode('field')" id="btn-field" class="selector-btn">Field Note</span>
+            </div>
+
         </div>
     </div>
 
     <script>
         function setMode(mode) {
-            document.querySelectorAll('.mode-section').forEach(s => s.classList.remove('active'));
-            document.getElementById('mode-' + mode).classList.add('active');
-            document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.view-container').forEach(v => v.classList.remove('active'));
+            document.getElementById('view-' + mode).classList.add('active');
+            document.querySelectorAll('.selector-btn').forEach(b => b.classList.remove('active'));
             document.getElementById('btn-' + mode).classList.add('active');
         }
 
