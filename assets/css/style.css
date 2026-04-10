@@ -102,11 +102,13 @@ h1, h2, h3, .serif { font-family: var(--font-serif); }
 }
 
 
+
+
+
 .navbar {
-    background-color: var(--rrmnhc-subtle-blue);
+    background-color: var(--rrmnhc-parchment);
     border-bottom: 1px solid var(--rrmnhc-border);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
-    /* Ensure translucency for a glass look */
     opacity: 0.9;
 }
