@@ -11,7 +11,7 @@
  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
- <script src="shared/nav.js"></script>
+ <script src="./shared/nav.js"></script>
  <style>
   :root {
    --light-parchment: #fdfcf9;
@@ -220,37 +220,37 @@
  <script>initNav();</script>
 
  <script>
-  const serverRoot = 'http://localhost:8081';
+  const serverRoot = './';
   const artifacts = [
    {
     filename: "Scaniverse 2026-02-04 130448.glb",
     displayName: "February 4, 2026 — 13:04",
     size: "18.3 MB",
-    path: `${serverRoot}/Artifacts/Scaniverse%202026-02-04%20130448.glb`
+    path: `./Artifacts/Scaniverse 2026-02-04 130448.glb`
    },
    {
     filename: "Scaniverse 2026-02-04 131557.glb",
     displayName: "February 4, 2026 — 13:15",
     size: "14.8 MB",
-    path: `${serverRoot}/Artifacts/Scaniverse%202026-02-04%20131557.glb`
+    path: `./Artifacts/Scaniverse 2026-02-04 131557.glb`
    },
    {
     filename: "Scaniverse 2026-04-15 125610.glb",
     displayName: "April 15, 2026 — 12:56",
     size: "18.2 MB",
-    path: `${serverRoot}/Artifacts/Scaniverse%202026-04-15%20125610.glb`
+    path: `./Artifacts/Scaniverse 2026-04-15 125610.glb`
    },
    {
     filename: "Scaniverse 2026-04-15 141311.glb",
     displayName: "April 15, 2026 — 14:13",
     size: "17.5 MB",
-    path: `${serverRoot}/Artifacts/Scaniverse%202026-04-15%20141311.glb`
+    path: `./Artifacts/Scaniverse 2026-04-15 141311.glb`
    },
    {
     filename: "Scaniverse 2026-04-15 143348.glb",
     displayName: "April 15, 2026 — 14:33",
     size: "14.9 MB",
-    path: `${serverRoot}/Artifacts/Scaniverse%202026-04-15%20143348.glb`
+    path: `./Artifacts/Scaniverse 2026-04-15 143348.glb`
    }
   ];
 
@@ -262,7 +262,7 @@
    grid.innerHTML = artifacts.map((a, i) => `
     <div class="artifact-card rounded-sm p-0 overflow-hidden" onclick="openViewer(${i})">
      <div class="aspect-square bg-[#f4f1ea] flex flex-col items-center justify-center border-b border-gray-100 overflow-hidden">
-      <img src="Artifacts/Thumbnails/${a.filename.replace('.glb', '.PNG')}" alt="${a.displayName}" class="w-full h-full object-cover">
+      <img src="./previews/${i + 1}.PNG" alt="${a.displayName}" class="w-full h-full object-cover">
      </div>
      <div class="p-5">
       <p class="text-xs text-gray-400 tracking-widest uppercase mb-1">${a.size}</p>
