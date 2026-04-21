@@ -220,37 +220,36 @@
  <script>initNav();</script>
 
  <script>
-  const serverRoot = './';
   const artifacts = [
    {
-    filename: "Scaniverse 2026-02-04 130448.glb",
-    displayName: "February 4, 2026 — 13:04",
+    filename: "1.glb",
+    displayName: "Scaniverse 2026-02-04 — 13:04",
     size: "18.3 MB",
-    path: `./Artifacts/Scaniverse 2026-02-04 130448.glb`
+    path: "./Artifacts/1.glb"
    },
    {
-    filename: "Scaniverse 2026-02-04 131557.glb",
-    displayName: "February 4, 2026 — 13:15",
+    filename: "2.glb",
+    displayName: "Scaniverse 2026-02-04 — 13:15",
     size: "14.8 MB",
-    path: `./Artifacts/Scaniverse 2026-02-04 131557.glb`
+    path: "./Artifacts/2.glb"
    },
    {
-    filename: "Scaniverse 2026-04-15 125610.glb",
-    displayName: "April 15, 2026 — 12:56",
+    filename: "3.glb",
+    displayName: "Scaniverse 2026-04-15 — 12:56",
     size: "18.2 MB",
-    path: `./Artifacts/Scaniverse 2026-04-15 125610.glb`
+    path: "./Artifacts/3.glb"
    },
    {
-    filename: "Scaniverse 2026-04-15 141311.glb",
-    displayName: "April 15, 2026 — 14:13",
+    filename: "4.glb",
+    displayName: "Scaniverse 2026-04-15 — 14:13",
     size: "17.5 MB",
-    path: `./Artifacts/Scaniverse 2026-04-15 141311.glb`
+    path: "./Artifacts/4.glb"
    },
    {
-    filename: "Scaniverse 2026-04-15 143348.glb",
-    displayName: "April 15, 2026 — 14:33",
+    filename: "5.glb",
+    displayName: "Scaniverse 2026-04-15 — 14:33",
     size: "14.9 MB",
-    path: `./Artifacts/Scaniverse 2026-04-15 143348.glb`
+    path: "./Artifacts/5.glb"
    }
   ];
 
@@ -262,7 +261,7 @@
    grid.innerHTML = artifacts.map((a, i) => `
     <div class="artifact-card rounded-sm p-0 overflow-hidden" onclick="openViewer(${i})">
      <div class="aspect-square bg-[#f4f1ea] flex flex-col items-center justify-center border-b border-gray-100 overflow-hidden">
-      <img src="./previews/${i + 1}.PNG" alt="${a.displayName}" class="w-full h-full object-cover">
+      <img src="./previews/${i + 1}.png" alt="${a.displayName}" class="w-full h-full object-cover">
      </div>
      <div class="p-5">
       <p class="text-xs text-gray-400 tracking-widest uppercase mb-1">${a.size}</p>
