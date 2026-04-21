@@ -1,15 +1,5 @@
-# OS files
+node_modules/
 .DS_Store
-Thumbs.db
-
-# IDEs
-.vscode/
-.idea/
-
-# Logs
 *.log
-
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
+.env
+generate-previews*.js

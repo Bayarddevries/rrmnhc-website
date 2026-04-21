@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Artifact Gallery • RRMNHC</title>
+ <script src="https://cdn.tailwindcss.com"></script>
+ <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+ <style>
+  :root {
+   --rrmnhc-red: #8B0000;
+   --rrmnhc-cream: #F5F5DC;
+   --rrmnhc-green: #228B22;
+   --rrmnhc-gold: #FFD700;
+   --rrmnhc-blue: #0047AB;
+   --rrmnhc-charcoal: #36454F;
+  }
+
+  body {
+   background-color: var(--rrmnhc-cream);
+   color: var(--rrmnhc-charcoal);
+   font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3 {
+   font-family: 'Playfair Display', serif;
+  }
+
+  .beadwork-divider {
+   height: 12px;
+   background-image: radial-gradient(circle, var(--rrmnhc-red) 30%, transparent 35%);
+   background-size: 15px 15px;
+   width: 100%;
+   opacity: 0.6;
+  }
+
+  .spoke-divider {
+   height: 40px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   overflow: hidden;
+  }
+  .spoke-pattern {
+   width: 100%;
+   height: 2px;
+   background: repeating-linear-gradient(
+    90deg,
+    var(--rrmnhc-charcoal),
+    var(--rrmnhc-charcoal) 10px,
+    transparent 10px,
+    transparent 20px
+   );
+   transform: rotate(45deg);
+   opacity: 0.2;
+  }
+
+  .btn-cart {
+   background-color: var(--rrmnhc-red);
+   color: white;
+   padding: 0.75rem 1.5rem;
+   border-radius: 2px;
+   font-weight: 600;
+   position: relative;
+   transition: all 0.3s ease;
+   border-bottom: 4px solid #5a0000;
+   text-transform: uppercase;
+   letter-spacing: 0.05em;
+  }
+  .btn-cart:hover {
+   transform: translateY(-2px);
+   box-shadow: 0 4px 12px rgba(139, 0, 0, 0.3);
+  }
+
+  .artifact-card {
+   background: white;
+   border: 1px solid rgba(54, 69, 79, 0.2);
+   transition: all 0.3s ease;
+  }
+  .artifact-card:hover {
+   transform: translateY(-4px);
+   box-shadow: 0 8px 24px rgba(139, 0, 0, 0.15);
+   border-color: var(--rrmnhc-red);
+  }
+
+  .viewer-container {
+   background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+   border: 2px solid var(--rrmnhc-charcoal);
+  }
+
+  .model-label {
+   background: var(--rrmnhc-red);
+   color: white;
+   font-family: 'Playfair Display', serif;
+  }
+ </style>
+</head>
+<body class="min-h-screen">
+
+ <header class="max-w-6xl mx-auto mb-8 pt-8 px-4">
+  <h1 class="text-4xl md:text-5xl mb-2 text-center">Artifact Gallery</h1>
+  <p class="text-xl text-gray-600 italic text-center">3D Scans from the Heritage Collection</p>
+ </header>
+
+ <div class="beadwork-divider mb-12"></div>
+
+ <main class="max-w-6xl mx-auto px-4 pb-16">
+  <div id="viewer-section" class="mb-12">
+   <div class="flex justify-between items-center mb-4">
+    <h2 class="text-2xl">Now Viewing</h2>
+    <button onclick="closeViewer()" class="text-gray-500 hover:text-gray-700 text-sm uppercase tracking-wide">Close Viewer</button>
+   </div>
+   <div class="viewer-container rounded-lg overflow-hidden relative" style="height: 500px;">
+    <div id="viewer-canvas" class="w-full h-full"></div>
+    <div id="viewer-label" class="model-label absolute top-4 left-4 px-4 py-2 text-sm"></div>
+    <div id="viewer-loading" class="absolute inset-0 flex items-center justify-center bg-black/50 text-white">
+     <div class="text-center">
+      <div class="cart-loader mx-auto mb-4"></div>
+      <p>Loading model...</p>
+     </div>
+    </div>
+   </div>
+  </div>
+
+  <section>
+   <h2 class="text-2xl mb-6">Available Artifacts</h2>
+   <div id="artifact-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+   </div>
+  </section>
+ </main>
+
+ <div class="spoke-divider mt-12">
+  <div class="spoke-pattern"></div>
+ </div>
+
+ <footer class="max-w-6xl mx-auto text-center text-gray-400 text-sm pb-12 pt-8">
+  <p>RRMNHC Artifact Collection • Preserving Digital Heritage</p>
+ </footer>
+
+ <script>
+  const serverRoot = 'http://localhost:8080';
+  const artifacts = [
+   {
+    filename: "Scaniverse 2026-02-04 130448.glb",
+    displayName: "Scan — Feb 4, 2026 13:04",
+    path: `${serverRoot}/Documents/Artifacts/Scaniverse%202026-02-04%20130448.glb`
+   },
+   {
+    filename: "Scaniverse 2026-02-04 131557.glb",
+    displayName: "Scan — Feb 4, 2026 13:15",
+    path: `${serverRoot}/Documents/Artifacts/Scaniverse%202026-02-04%20131557.glb`
+   },
+   {
+    filename: "Scaniverse 2026-04-15 125610.glb",
+    displayName: "Scan — Apr 15, 2026 12:56",
+    path: `${serverRoot}/Documents/Artifacts/Scaniverse%202026-04-15%20125610.glb`
+   },
+   {
+    filename: "Scaniverse 2026-04-15 141311.glb",
+    displayName: "Scan — Apr 15, 2026 14:13",
+    path: `${serverRoot}/Documents/Artifacts/Scaniverse%202026-04-15%20141311.glb`
+   },
+   {
+    filename: "Scaniverse 2026-04-15 143348.glb",
+    displayName: "Scan — Apr 15, 2026 14:33",
+    path: `${serverRoot}/Documents/Artifacts/Scaniverse%202026-04-15%20143348.glb`
+   }
+  ];
+
+  let currentViewer = null;
+  let currentScene = null;
+  let currentCamera = null;
+  let currentRenderer = null;
+  let currentAnimationId = null;
+
+  function formatFileSize(path) {
+   // Placeholder - actual sizes shown in cards
+   return "~15-19 MB";
+  }
+
+  function renderArtifactGrid() {
+   const grid = document.getElementById('artifact-grid');
+   grid.innerHTML = artifacts.map((artifact, i) => `
+    <div class="artifact-card rounded-lg p-4 cursor-pointer" onclick="openViewer(${i})">
+     <div class="bg-gray-100 rounded mb-4 flex items-center justify-center" style="height: 160px;">
+      <svg class="w-16 h-16 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+      </svg>
+     </div>
+     <h3 class="text-lg font-semibold mb-1">${artifact.displayName}</h3>
+     <p class="text-sm text-gray-500">${artifact.filename}</p>
+     <button class="btn-cart mt-4 w-full text-sm py-2">View in 3D</button>
+    </div>
+   `).join('');
+  }
+
+  function closeViewer() {
+   document.getElementById('viewer-section').style.display = 'none';
+   if (currentAnimationId) {
+    cancelAnimationFrame(currentAnimationId);
+   }
+   if (currentRenderer) {
+    currentRenderer.dispose();
+   }
+   currentViewer = null;
+  }
+
+  async function openViewer(index) {
+   const artifact = artifacts[index];
+   document.getElementById('viewer-section').style.display = 'block';
+   document.getElementById('viewer-label').textContent = artifact.displayName;
+   document.getElementById('viewer-loading').style.display = 'flex';
+
+   const container = document.getElementById('viewer-canvas');
+   container.innerHTML = '';
+
+   // Three.js setup
+   const scene = new THREE.Scene();
+   scene.background = new THREE.Color(0x1a1a2e);
+
+   const camera = new THREE.PerspectiveCamera(60, container.clientWidth / container.clientHeight, 0.1, 1000);
+   camera.position.set(2, 1.5, 2);
+
+   const renderer = new THREE.WebGLRenderer({ antialias: true });
+   renderer.setSize(container.clientWidth, container.clientHeight);
+   renderer.setPixelRatio(window.devicePixelRatio);
+   renderer.outputEncoding = THREE.sRGBEncoding;
+   renderer.toneMapping = THREE.ACESFilmicToneMapping;
+   renderer.toneMappingExposure = 1;
+   container.appendChild(renderer.domElement);
+
+   // Lighting
+   const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+   scene.add(ambientLight);
+
+   const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+   directionalLight.position.set(5, 5, 5);
+   scene.add(directionalLight);
+
+   const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.4);
+   directionalLight2.position.set(-5, 3, -5);
+   scene.add(directionalLight2);
+
+   // Grid helper
+   const gridHelper = new THREE.GridHelper(10, 20, 0x444444, 0x222222);
+   scene.add(gridHelper);
+
+   // OrbitControls
+   const controls = new THREE.OrbitControls(camera, renderer.domElement);
+   controls.enableDamping = true;
+   controls.dampingFactor = 0.05;
+   controls.minDistance = 0.5;
+   controls.maxDistance = 50;
+
+   currentScene = scene;
+   currentCamera = camera;
+   currentRenderer = renderer;
+
+   // Load GLB
+   try {
+    const loader = new THREE.GLTFLoader();
+    
+    loader.load(
+     artifact.path,
+     (gltf) => {
+      const model = gltf.scene;
+      
+      // Center and scale model
+      const box = new THREE.Box3().setFromObject(model);
+      const center = box.getCenter(new THREE.Vector3());
+      const size = box.getSize(new THREE.Vector3());
+      const maxDim = Math.max(size.x, size.y, size.z);
+      const scale = 2 / maxDim;
+      
+      model.scale.setScalar(scale);
+      model.position.sub(center.multiplyScalar(scale));
+      
+      scene.add(model);
+      document.getElementById('viewer-loading').style.display = 'none';
+     },
+     null,
+     (error) => {
+      console.error('Error loading GLB:', error);
+      document.getElementById('viewer-loading').innerHTML = '<p class="text-red-400">Error loading model: ' + error.message + '</p>';
+     }
+    );
+   } catch (error) {
+    console.error('Error:', error);
+    document.getElementById('viewer-loading').innerHTML = `
+     <div class="text-center text-white p-8">
+      <p class="text-red-400 mb-2">Unable to load model</p>
+      <p class="text-sm text-gray-400">' + error.message + '</p>
+     </div>
+    `;
+   }
+
+   function animate() {
+    currentAnimationId = requestAnimationFrame(animate);
+    controls.update();
+    renderer.render(scene, camera);
+   }
+   animate();
+
+   // Handle resize
+   window.addEventListener('resize', () => {
+    if (!container || !camera || !renderer) return;
+    camera.aspect = container.clientWidth / container.clientHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(container.clientWidth, container.clientHeight);
+   });
+  }
+
+  // Initialize
+  renderArtifactGrid();
+  document.getElementById('viewer-section').style.display = 'none';
+ </script>
+
+</body>
+</html>

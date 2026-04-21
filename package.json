@@ -1,0 +1,22 @@
+{
+  "name": "website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@loaders.gl/core": "^4.4.1",
+    "@loaders.gl/gltf": "^4.4.1",
+    "canvas": "^3.2.3",
+    "gl": "^8.1.6",
+    "jsdom": "^29.0.2",
+    "pngjs": "^7.0.0",
+    "puppeteer": "^19.11.1",
+    "three": "^0.184.0"
+  }
+}
