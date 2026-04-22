@@ -11,10 +11,12 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body class="relative">
+<nav class="site-nav"></nav>
+
     <div class="doc-texture"></div>
 
     <!-- Navigation -->
- <nav class="site-nav"></nav>
+ 
 
     <!-- Page Header -->
     <header class="pt-32 pb-16 px-6 text-center">
@@ -108,5 +110,16 @@
     <div style="text-align:center; padding: 20px; border-top: 1px solid #8B0000; margin-top: 40px;">
         <a href="design-system/rrmnhc_design_spec_showcase.html" style="color: #8B0000; text-decoration: none; font-family: serif;">View Design System Specs</a>
     </div>
-<script src="./shared/nav.js"></script><script>initNav();</script></body>
+<script src="./shared/nav.js"></script>
+<div id="sidebar-overlay" onclick="toggleSidebar()"></div>
+<nav id="sidebar">
+  <h2 class="cinzel text-sm text-red-800 mb-8">Navigation</h2>
+  <a href="index.html" class="sidebar-link">Home</a>
+  <a href="news.html" class="sidebar-link">News</a>
+  <a href="artifacts-viewer.html" class="sidebar-link">Artifacts</a>
+  <a href="contact.html" class="sidebar-link">Contact</a>
+</nav>
+
+<script>initNav();</script>
+</body>
 </html>

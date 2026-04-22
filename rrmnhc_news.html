@@ -17,11 +17,13 @@
   .news-card:hover { transform: translateY(-5px); }
  </style>
 </head>
-<body class="relative"><nav class="site-nav"></nav>
+<body class="relative">
+<nav class="site-nav"></nav>
+
  <div class="doc-texture"></div>
 
  <!-- Navigation -->
- <nav class="site-nav fixed top-0 left-0 w-full z-[100] px-6 py-5 flex justify-between items-center bg-[#fdfcf9]/80 backdrop-blur-sm"></nav>
+ 
 
  <!-- Page Header -->
  <header class="pt-32 pb-16 px-6 text-center">
@@ -118,6 +120,16 @@
  </footer>
 
  <script src="shared/nav.js"></script>
- <script>initNav();</script>
+ 
+<div id="sidebar-overlay" onclick="toggleSidebar()"></div>
+<nav id="sidebar">
+  <h2 class="cinzel text-sm text-red-800 mb-8">Navigation</h2>
+  <a href="index.html" class="sidebar-link">Home</a>
+  <a href="news.html" class="sidebar-link">News</a>
+  <a href="artifacts-viewer.html" class="sidebar-link">Artifacts</a>
+  <a href="contact.html" class="sidebar-link">Contact</a>
+</nav>
+
+<script>initNav();</script>
 </body>
 </html>

@@ -17,11 +17,13 @@
   @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
  </style>
 </head>
-<body class="relative"><nav class="site-nav"></nav>
+<body class="relative">
+<nav class="site-nav"></nav>
+
  <div class="doc-texture"></div>
 
  <!-- Navigation -->
- <nav class="site-nav fixed top-0 left-0 w-full z-[100] px-6 py-6 flex justify-between items-center bg-transparent"></nav>
+ 
 
  <!-- Hero Section -->
  <section class="relative h-screen flex flex-col items-center justify-center text-center px-4">
@@ -77,6 +79,16 @@
  </footer>
 
  <script src="shared/nav.js"></script>
- <script>initNav();</script>
+ 
+<div id="sidebar-overlay" onclick="toggleSidebar()"></div>
+<nav id="sidebar">
+  <h2 class="cinzel text-sm text-red-800 mb-8">Navigation</h2>
+  <a href="index.html" class="sidebar-link">Home</a>
+  <a href="news.html" class="sidebar-link">News</a>
+  <a href="artifacts-viewer.html" class="sidebar-link">Artifacts</a>
+  <a href="contact.html" class="sidebar-link">Contact</a>
+</nav>
+
+<script>initNav();</script>
 </body>
 </html>

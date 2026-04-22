@@ -31,8 +31,10 @@
         .section-card { background: white; border: 1px solid rgba(0,0,0,0.08); box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
     </style>
 </head>
-<body class="relative"><nav class="site-nav"></nav>
-    <nav class="site-nav fixed top-0 left-0 w-full z-[100] px-6 py-5 flex justify-between items-center bg-[#fdfcf9]/90 backdrop-blur-md border-b border-gray-100/50"></nav>
+<body class="relative">
+<nav class="site-nav"></nav>
+
+    
     <header class="pt-36 pb-12 px-6 text-center">
         <h1 class="text-5xl mb-3">Design System</h1>
         <div class="w-16 h-0.5 bg-red-800 mx-auto mb-5"></div>
@@ -69,7 +71,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="section-card flex flex-col items-center space-y-4 p-8 rounded-sm"><p class="text-xs text-gray-500">Button</p><button class="btn-cart">Contribute</button></div>
                 <div class="section-card flex flex-col items-center space-y-4 p-8 rounded-sm"><p class="text-xs text-gray-500">Loading</p><div class="cart-loader"></div></div>
-                <div class="section-card flex flex-col items-center space-y-4 p-8 rounded-sm"><p class="text-xs text-gray-500">Navigation</p><nav class="vine-nav bg-gray-50 rounded-sm"><div class="vine-node">Home</div><div class="vine-node">Archive</div></nav></div>
+                <div class="section-card flex flex-col items-center space-y-4 p-8 rounded-sm"><p class="text-xs text-gray-500">Navigation</p></div>
             </div>
         </section>
         <section class="pb-8">
@@ -86,6 +88,16 @@
         <p class="text-[10px]">&copy; 2026 Red River Métis National Heritage Centre</p>
     </footer>
     <script src="shared/nav.js"></script>
-    <script>initNav();</script>
+    
+<div id="sidebar-overlay" onclick="toggleSidebar()"></div>
+<nav id="sidebar">
+  <h2 class="cinzel text-sm text-red-800 mb-8">Navigation</h2>
+  <a href="index.html" class="sidebar-link">Home</a>
+  <a href="news.html" class="sidebar-link">News</a>
+  <a href="artifacts-viewer.html" class="sidebar-link">Artifacts</a>
+  <a href="contact.html" class="sidebar-link">Contact</a>
+</nav>
+
+<script>initNav();</script>
 </body>
 </html>
