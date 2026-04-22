@@ -24,7 +24,7 @@
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         .vine-nav { display: flex; gap: 2rem; padding: 1rem; }
         .vine-node { position: relative; padding: 0.5rem 1rem; cursor: pointer; }
-        .vine-node::before { content: ""; position: absolute; top: 50%; left: -1rem; width: 1rem; height: 2px; background: #228B22; transform: rotate(-45deg); opacity: 0.4; }
+        .vine-node::before { content: ""; position: absolute; top: 50%; left: -1rem; width: 1rem; height: 2px; background: var(--rrmnhc-green); transform: rotate(-45deg); opacity: 0.4; }
         .offset-grid { display: grid; grid-template-columns: repeat(12,1fr); gap: 1rem; }
         .offset-item-1 { grid-column: 1 / span 7; }
         .offset-item-2 { grid-column: 8 / span 5; margin-top: 2rem; }
@@ -44,12 +44,12 @@
         <section>
             <h2 class="text-3xl mb-8">1. The Palette</h2>
             <div class="grid grid-cols-2 md:grid-cols-6 gap-4">
-                <div class="section-card p-4 rounded-sm"><div class="h-20 w-full rounded-sm mb-3" style="background-color:#8B0000;"></div><p class="text-sm font-bold">Deep Red</p><p class="text-xs text-gray-400">#8B0000</p></div>
+                <div class="section-card p-4 rounded-sm"><div class="h-20 w-full rounded-sm mb-3" style="background-color:var(--rrmnhc-red);"></div><p class="text-sm font-bold">Deep Red</p><p class="text-xs text-gray-400">var(--rrmnhc-red)</p></div>
                 <div class="section-card p-4 rounded-sm border border-gray-200"><div class="h-20 w-full rounded-sm mb-3" style="background-color:#fdfcf9;"></div><p class="text-sm font-bold">Parchment</p><p class="text-xs text-gray-400">#fdfcf9</p></div>
-                <div class="section-card p-4 rounded-sm"><div class="h-20 w-full rounded-sm mb-3" style="background-color:#228B22;"></div><p class="text-sm font-bold">Forest Green</p><p class="text-xs text-gray-400">#228B22</p></div>
-                <div class="section-card p-4 rounded-sm"><div class="h-20 w-full rounded-sm mb-3" style="background-color:#FFD700;"></div><p class="text-sm font-bold">Golden Yellow</p><p class="text-xs text-gray-400">#FFD700</p></div>
-                <div class="section-card p-4 rounded-sm"><div class="h-20 w-full rounded-sm mb-3" style="background-color:#0047AB;"></div><p class="text-sm font-bold">Cobalt Blue</p><p class="text-xs text-gray-400">#0047AB</p></div>
-                <div class="section-card p-4 rounded-sm"><div class="h-20 w-full rounded-sm mb-3" style="background-color:#36454F;"></div><p class="text-sm font-bold">Charcoal</p><p class="text-xs text-gray-400">#36454F</p></div>
+                <div class="section-card p-4 rounded-sm"><div class="h-20 w-full rounded-sm mb-3" style="background-color:var(--rrmnhc-green);"></div><p class="text-sm font-bold">Forest Green</p><p class="text-xs text-gray-400">var(--rrmnhc-green)</p></div>
+                <div class="section-card p-4 rounded-sm"><div class="h-20 w-full rounded-sm mb-3" style="background-color:var(--rrmnhc-gold);"></div><p class="text-sm font-bold">Golden Yellow</p><p class="text-xs text-gray-400">var(--rrmnhc-gold)</p></div>
+                <div class="section-card p-4 rounded-sm"><div class="h-20 w-full rounded-sm mb-3" style="background-color:var(--rrmnhc-blue);"></div><p class="text-sm font-bold">Cobalt Blue</p><p class="text-xs text-gray-400">var(--rrmnhc-blue)</p></div>
+                <div class="section-card p-4 rounded-sm"><div class="h-20 w-full rounded-sm mb-3" style="background-color:var(--rrmnhc-charcoal);"></div><p class="text-sm font-bold">Charcoal</p><p class="text-xs text-gray-400">var(--rrmnhc-charcoal)</p></div>
             </div>
         </section>
         <section>

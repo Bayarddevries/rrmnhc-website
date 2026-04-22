@@ -84,7 +84,8 @@ function initNav() {
       { href: 'index.html', label: 'Home' },
       { href: 'news.html', label: 'News' },
       { href: 'artifacts-viewer.html', label: 'Artifacts' },
-      { href: 'contact.html', label: 'Contact' }
+      { href: 'contact.html', label: 'Contact' },
+      { href: 'shoebox/index.html', label: 'Digital Archive' }
     ];
 
     nav.innerHTML = `
