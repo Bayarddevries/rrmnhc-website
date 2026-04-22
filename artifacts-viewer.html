@@ -242,22 +242,6 @@
  <div class="doc-texture"></div>
  
  <!-- New Mobile-First Navigation -->
- <button class="menu-toggle" onclick="toggleSidebar()">☰ MENU</button>
- 
- <div id="sidebar-overlay" onclick="toggleSidebar()"></div>
- 
- <nav id="sidebar">
-  <h2 class="cinzel text-sm text-red-800 mb-8 opacity-60 uppercase tracking-widest">Navigation</h2>
-  <a href="index.html" class="sidebar-link">Home</a>
-  <a href="news.html" class="sidebar-link">News</a>
-  <a href="artifacts-viewer.html" class="sidebar-link">Artifacts</a>
-  <a href="contact.html" class="sidebar-link">Contact</a>
- </nav>
- 
- <!-- Page Header -->
- <header class="pt-36 pb-10 px-6 text-center">
-  <p class="cinzel text-xs tracking-[0.25em] text-red-800 mb-4 uppercase">Digital Heritage Collection</p>
-  <h1 class="text-4xl md:text-5xl font-bold text-[#1a1a1a] mb-3">Artifact Gallery</h1>
   <div class="w-12 h-0.5 bg-red-800 mx-auto mb-4"></div>
   <p class="text-base opacity-60 max-w-xl mx-auto">Interactive 3D scans from the RRMNHC archive. Rotate, zoom, and explore each artifact.</p>
  </header>
@@ -456,19 +440,5 @@
  </script>
  
  <script>
-function toggleSidebar() {
-  const sidebar = document.getElementById('sidebar');
-  const overlay = document.getElementById('sidebar-overlay');
-  const isOpen = sidebar.classList.contains('open');
-  
-  if (isOpen) {
-    sidebar.classList.remove('open');
-    overlay.style.display = 'none';
-  } else {
-    sidebar.classList.add('open');
-    overlay.style.display = 'block';
-  }
-}
-</script>
 </body>
 </html>
