@@ -1,0 +1,149 @@
+/* RRMNHC Global Design Tokens */
+:root {
+    --rrmnhc-red: #8B0000;
+    --rrmnhc-cream: #F5F5DC;
+    --rrmnhc-green: #228B22;
+    --rrmnhc-gold: #FFD700;
+    --rrmnhc-blue: #0047AB;
+    --rrmnhc-charcoal: #36454F;
+    --font-monumental: 'Playfair Display', serif;
+    --font-accessible: 'Inter', sans-serif;
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 2rem;
+    --space-lg: 4rem;
+}
+
+body {
+    background-color: var(--rrmnhc-cream);
+    color: var(--rrmnhc-charcoal);
+    font-family: var(--font-accessible);
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-monumental);
+    color: var(--rrmnhc-charcoal);
+}
+
+/* --- Navigation Polish --- */
+.site-nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(54, 69, 79, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 998;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.site-nav-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.site-nav-sidebar {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 300px;
+    height: 100%;
+    background: var(--rrmnhc-cream);
+    border-right: 4px solid var(--rrmnhc-red);
+    z-index: 999;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 2rem 0;
+    box-shadow: 10px 0 20px rgba(0,0,0,0.1);
+}
+
+.site-nav-sidebar.active {
+    left: 0;
+}
+
+.site-nav-link {
+    display: block;
+    padding: 1rem 2rem;
+    color: var(--rrmnhc-charcoal);
+    text-decoration: none;
+    font-family: var(--font-accessible);
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border-left: 5px solid transparent;
+}
+
+.site-nav-link:hover {
+    background: rgba(139, 0, 0, 0.05);
+    color: var(--rrmnhc-red);
+    padding-left: 2.5rem;
+}
+
+.site-nav-link.active {
+    color: var(--rrmnhc-red);
+    border-left-color: var(--rrmnhc-red);
+    background: rgba(139, 0, 0, 0.1);
+}
+
+.menu-toggle {
+    background: var(--rrmnhc-red);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.25rem;
+    cursor: pointer;
+    font-family: var(--font-monumental);
+    font-weight: bold;
+    transition: all 0.2s ease;
+    z-index: 1000;
+    position: relative;
+}
+
+.menu-toggle:active {
+    transform: scale(0.95);
+}
+
+/* Cultural Motifs */
+.beadwork-divider {
+    height: 12px;
+    background-image: radial-gradient(circle, var(--rrmnhc-red) 30%, transparent 35%);
+    background-size: 15px 15px;
+    width: 100%;
+    opacity: 0.6;
+}
+
+.spoke-divider {
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.spoke-pattern {
+    width: 100%;
+    height: 2px;
+    background: repeating-linear-gradient(90deg, var(--rrmnhc-charcoal), var(--rrmnhc-charcoal) 10px, transparent 10px, transparent 20px);
+    transform: rotate(45deg);
+    opacity: 0.2;
+}
+
+.btn-primary {
+    background-color: var(--rrmnhc-red);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 2px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 4px solid #5a0000;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(139, 0, 0, 0.3);
+}
