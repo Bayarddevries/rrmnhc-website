@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-M-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Red River Métis Shoebox</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Indie+Flower&family=Kalam:wght@400;700&family=Oswald:wght@700&family=Patrick+Hand&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <style>
+      body {
+        font-family: 'Arial Nova Cond', 'Roboto Condensed', sans-serif;
+        /* Warm dark grey base */
+        background-color: #27272a; 
+        /* Texture Stack: 
+           1. Radial Gradient (Spotlight effect)
+           2. SVG Noise Pattern (Tactile grain)
+        */
+        background-image: 
+            radial-gradient(circle at 50% 50%, rgba(255,255,255,0.08) 0%, rgba(0,0,0,0.6) 100%),
+            url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.07'/%3E%3C/svg%3E");
+        background-attachment: fixed;
+        color: #ffffff;
+        overscroll-behavior: none;
+        touch-action: none;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        overflow: hidden;
+      }
+      .font-heading {
+        font-family: 'Oswald', sans-serif;
+      }
+      .font-gochi-hand { font-family: 'Gochi Hand', cursive; }
+      .font-patrick-hand { font-family: 'Patrick Hand', cursive; }
+      .font-kalam { font-family: 'Kalam', cursive; }
+      .font-indie-flower { font-family: 'Indie Flower', cursive; }
+      .photo-item {
+        will-change: transform;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        touch-action: none;
+      }
+      .photo-item.dragging {
+        cursor: grabbing !important;
+        /* Deep lifting shadow when dragging */
+        box-shadow: 0 35px 60px -15px rgba(0, 0, 0, 0.8) !important;
+        z-index: 9999 !important;
+      }
+      /* Realistic card shadow */
+      .shadow-sharp {
+        box-shadow: 
+          0 1px 1px rgba(0,0,0,0.15), 
+          0 2px 2px rgba(0,0,0,0.15), 
+          0 4px 4px rgba(0,0,0,0.15), 
+          0 8px 8px rgba(0,0,0,0.15);
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      @keyframes zoomIn {
+        from { transform: scale(0.8); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+      }
+      @keyframes pulse-text {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.7; }
+      }
+      .kenburns-tl { animation-name: kenburns-tl-kf; transform-origin: top left; }
+      .kenburns-tr { animation-name: kenburns-tr-kf; transform-origin: top right; }
+      .kenburns-bl { animation-name: kenburns-bl-kf; transform-origin: bottom left; }
+      .kenburns-br { animation-name: kenburns-br-kf; transform-origin: bottom right; }
+      @keyframes kenburns-tl-kf { 0% { transform: scale(1.1) translate(0, 0); } 100% { transform: scale(1.3) translate(-10%, -5%); } }
+      @keyframes kenburns-tr-kf { 0% { transform: scale(1.1) translate(0, 0); } 100% { transform: scale(1.3) translate(10%, -5%); } }
+      @keyframes kenburns-bl-kf { 0% { transform: scale(1.1) translate(0, 0); } 100% { transform: scale(1.3) translate(-10%, 5%); } }
+      @keyframes kenburns-br-kf { 0% { transform: scale(1.1) translate(0, 0); } 100% { transform: scale(1.3) translate(10%, 5%); } }
+      @keyframes polaroid-drop {
+        0% { transform: translateY(-100vh) rotate(-15deg); opacity: 0; }
+        100% { transform: translateY(0) rotate(var(--rotation)); opacity: 1; }
+      }
+      @keyframes filmstrip-scroll {
+        from { transform: translateX(0%); }
+        to { transform: translateX(calc(-100% + 100vw)); }
+      }
+      /* Custom scrollbar for sidebar */
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.05);
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.1.1/",
+    "react": "https://aistudiocdn.com/react@^19.1.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
+    "exifr": "https://cdn.jsdelivr.net/npm/exifr/dist/full.esm.js"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>

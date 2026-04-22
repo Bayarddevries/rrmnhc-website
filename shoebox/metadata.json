@@ -1,0 +1,5 @@
+{
+  "name": "Red River Métis Shoebox",
+  "description": "A digital photo archive application that allows users to upload, view, and interact with photos in a scrapbook-style interface, preserving the stories of the Red River Métis community.",
+  "requestFramePermissions": []
+}
