@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body class="relative">
-<nav class="site-nav"></nav>
+<nav class="site-nav" data-active="centre"></nav>
 
     <div class="doc-texture"></div>
 
@@ -110,16 +110,6 @@
     <div style="text-align:center; padding: 20px; border-top: 1px solid var(--rrmnhc-red); margin-top: 40px;">
         <a href="design-system/rrmnhc_design_spec_showcase.html" style="color: var(--rrmnhc-red); text-decoration: none; font-family: serif;">View Design System Specs</a>
     </div>
-<script src="./shared/nav.js"></script>
-<div id="sidebar-overlay" onclick="toggleSidebar()"></div>
-<nav id="sidebar">
-  <h2 class="cinzel text-sm text-red-800 mb-8">Navigation</h2>
-  <a href="index.html" class="sidebar-link">Home</a>
-  <a href="news.html" class="sidebar-link">News</a>
-  <a href="artifacts-viewer.html" class="sidebar-link">Artifacts</a>
-  <a href="contact.html" class="sidebar-link">Contact</a>
-</nav>
-
-<script>initNav();</script>
+<script src="./shared/site-nav.js"></script>
 </body>
 </html>
