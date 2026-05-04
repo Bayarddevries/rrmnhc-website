@@ -325,8 +325,8 @@
    const grid = document.getElementById('artifact-grid');
    grid.innerHTML = artifacts.map((a, i) => `
     <div class="artifact-card rounded-sm p-0 overflow-hidden" onclick="openViewer(${i})">
-<div class="bg-[#f4f1ea] flex items-center justify-center border-b border-gray-100 overflow-hidden" style="min-height:140px;max-height:260px">
-      <img src="./Artifacts/Thumbnails/${i + 1}.PNG" alt="${a.displayName}" class="w-full h-full object-contain">
+<div class="bg-[#f4f1ea] flex items-center justify-center border-b border-gray-100">
+      <img src="./Artifacts/Thumbnails/${i + 1}.PNG" alt="${a.displayName}" class="w-full max-h-[340px] object-contain">
       </div>
      <div class="p-5">
       <p class="text-xs text-gray-400 tracking-widest uppercase mb-1">${a.size}</p>
