@@ -6,6 +6,15 @@
 
 ---
 
+## 📋 Documentation Suite
+This project follows a standardized documentation structure:
+- [**AGENTS.md**](/AGENTS.md) — Operating instructions for AI agents.
+- [**ISSUES.md**](/ISSUES.md) — Local task and bug tracking.
+- [**CHANGELOG.md**](/99-Project-Management/CHANGELOG.md) — High-level history of major shifts.
+- [**README.md**](/README.md) — Project overview and technical architecture.
+
+---
+
 ## Overview
 
 Website for the **Red River Métis National Heritage Centre** — a living
@@ -13,8 +22,8 @@ landmark preserving and sharing Métis culture, history, and artifacts.
 The site features a homepage, news section, artifacts 3D viewer, and
 contact page.
 
-Pages are cross-linked with the Métis Homeland Map and Shoebox Digital
-Archive via shared navigation (see `site-nav.js`).
+Pages are cross-linked with the Métis Homeland Map and Shoebox
+Digital Archive via shared navigation (see `site-nav.js`).
 
 ## Pages
 
@@ -52,6 +61,8 @@ rrmnhc-website/
 ├── shared/site-nav.js            # Local cross-site navigation
 ├── shoebox/                      # Shoebox integration (embedded)
 ├── 99-Project-Management/        # Changelog & session logs
+├── AGENTS.md                     # AI Agent instructions
+├── ISSUES.md                     # Task tracking
 └── website archived/             # V1 & V2 archived versions
 ```
 
