@@ -3,6 +3,7 @@
     --rrmnhc-subtle-blue: #9ac6e0;  /* subtle blue for nav */
     /* --- COLOR PALETTE --- */
     --rrmnhc-crimson: #8b0000;
+    --rrmnhc-crimson-dark: #6b0000;
     --rrmnhc-crimson-light: #b30000;
     --rrmnhc-parchment: #fdfcf9;
     --rrmnhc-cream: #f4f1ea;
@@ -43,7 +44,15 @@
     /* --- SHADOWS --- */
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
     --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-}
+  }
+
+  /* --- CRIMSON UTILITY CLASSES --- */
+  .text-crimson { color: var(--rrmnhc-crimson); }
+  .bg-crimson { background-color: var(--rrmnhc-crimson); }
+  .border-crimson { border-color: var(--rrmnhc-crimson); }
+  .bg-crimson-dark { background-color: var(--rrmnhc-crimson-dark); }
+  .hover\:text-crimson:hover { color: var(--rrmnhc-crimson); }
+  .hover\:bg-crimson:hover { background-color: var(--rrmnhc-crimson); }
 
 /* --- RESET & BASE --- */
 body {
