@@ -161,8 +161,9 @@ function initNav() {
     links.forEach(l => {
       const link = document.createElement('a');
       link.href = l.href;
-      link.className = 'sidebar-link'; 
+      link.className = 'sidebar-link';
       link.textContent = l.label;
+      link.dataset.page = l.id;  // so active state can match by page identifier
       sidebar.appendChild(link);
     });
 
@@ -172,7 +173,7 @@ function initNav() {
   document.querySelectorAll('.site-nav').forEach(nav => {
     const activeId = nav.dataset.active || '';
     
-    const activeLink = document.querySelector(`.sidebar-link[href*="${activeId}"]`);
+    const activeLink = document.querySelector(`.sidebar-link[data-page="${activeId}"]`);
     if (activeLink) {
         activeLink.classList.add('active');
     }
