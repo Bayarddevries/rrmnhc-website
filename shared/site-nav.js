@@ -5,12 +5,6 @@
  * - Main Heritage Centre site
  * - Métis Homeland Map
  * - Shoebox Digital Archive
- * 
- * Usage: Add to any page:
- *   <div class="site-nav" data-active="centre|map|archive"></div>
- *   <script src="https://bayarddevries.github.io/shared-assets/site-nav.js"></script>
- * 
- * The data-active attribute dims the current site's link so users know where they are.
  */
 
 function initNav() {
@@ -32,7 +26,7 @@ function initNav() {
       width: 300px;
       height: 100%;
       background: #fdfcf9;
-      border-right: 1px solid rgba(139,0,0,0.1);
+      border-right: 1px solid rgba(0,0,0,0.1);
       z-index: 1950;
       transition: transform 0.3s ease;
       padding: 3rem 2rem;
@@ -56,10 +50,10 @@ function initNav() {
       display: block;
     }
     .sidebar-link:hover {
-      color: #8b0000;
+      color: var(--mmf-crimson, #8b0000);
     }
     .sidebar-link.active {
-      color: #8b0000;
+      color: var(--mmf-crimson, #8b0000);
       opacity: 0.4;
       cursor: default;
       pointer-events: none;
@@ -69,7 +63,7 @@ function initNav() {
       top: 1.5rem;
       right: 1.5rem;
       z-index: 2000;
-      background: #8b0000;
+      background: var(--mmf-crimson, #8b0000);
       color: white;
       padding: 0.6rem 1.2rem;
       font-family: 'Cinzel', serif;
@@ -77,30 +71,29 @@ function initNav() {
       letter-spacing: 0.1em;
       cursor: pointer;
       border: none;
-      box-shadow: 0 4px 12px rgba(139,0,0,0.2);
+      box-shadow: 0 4px 12px rgba(139, 0, 0, 0.2);
       transition: background 0.2s;
     }
- .menu-toggle:hover {
- background: #a00000;
- }
- .menu-close {
- position: absolute;
- top: 1.5rem;
- right: 1.5rem;
- background: none;
- border: none;
- font-size: 1.5rem;
- color: #2c2c2c;
- cursor: pointer;
- padding: 0.25rem;
- line-height: 1;
- opacity: 0.6;
- transition: opacity 0.2s;
- }
- .menu-close:hover {
- opacity: 1;
- }
- /* Map pages: avoid Leaflet zoom control overlap */
+    .menu-toggle:hover {
+      background: var(--mmf-crimson-dark, #6b0000);
+    }
+    .menu-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: #2c2c2c;
+      cursor: pointer;
+      padding: 0.25rem;
+      line-height: 1;
+      opacity: 0.6;
+      transition: opacity 0.2s;
+    }
+    .menu-close:hover {
+      opacity: 1;
+    }
     .site-nav[data-active="map"] ~ .menu-toggle,
     .site-nav[data-active="map"] .menu-toggle {
       right: auto;
@@ -134,36 +127,65 @@ function initNav() {
     }
   });
 
-  // ── 4. Inject nav into each .site-nav ──────────────
+  // ── 4. Inject Navigation ─────────────────────────────
   const BASE = 'https://bayarddevries.github.io';
-  
- const links = [
- { id: 'centre', href: `${BASE}/rrmnhc-website/`, label: 'Heritage Centre' },
- { id: 'artifacts', href: `${BASE}/rrmnhc-website/artifacts-viewer.html`, label: 'Artifacts' },
- { id: 'news', href: `${BASE}/rrmnhc-website/news.html`, label: 'News' },
- { id: 'contact', href: `${BASE}/rrmnhc-website/contact.html`, label: 'Contact' },
- { id: 'map', href: `${BASE}/metis-homeland-map/`, label: 'Homeland Map' },
- { id: 'archive', href: `${BASE}/shoebox-v2/`, label: 'Digital Archive' },
- ];
+  const links = [
+    { id: 'centre', href: `${BASE}/rrmnhc-website/`, label: 'Heritage Centre' },
+    { id: 'artifacts', href: `${BASE}/rrmnhc-website/artifacts-viewer.html`, label: 'Artifacts' },
+    { id: 'news', href: `${BASE}/rrmnhc-website/news.html`, label: 'News' },
+    { id: 'contact', href: `${BASE}/rrmnhc-website/contact.html`, label: 'Contact' },
+    { id: 'map', href: `${BASE}/metis-homeland-map/`, label: 'Homeland Map' },
+    { id: 'archive', href: `${BASE}/shoebox-v2/`, label: 'Digital Archive' },
+  ];
+
+  if (!document.getElementById('sidebar')) {
+    const overlay = document.createElement('div');
+    overlay.id = 'sidebar-overlay';
+    overlay.onclick = window.toggleSidebar;
+    document.body.appendChild(overlay);
+
+    const sidebar = document.createElement('nav');
+    sidebar.id = 'sidebar';
+    
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'menu-close';
+    closeBtn.innerHTML = '✕';
+    closeBtn.onclick = window.toggleSidebar;
+    sidebar.appendChild(closeBtn);
+
+    const navHeader = document.createElement('h2');
+    navHeader.style = "font-family: 'Cinzel', serif; color: var(--mmf-crimson, #8b0000); font-size: 0.875rem; margin-bottom: 2rem; text-transform: uppercase; letter-spacing: 0.1em;";
+    navHeader.textContent = 'Navigation';
+    sidebar.appendChild(navHeader);
+
+    links.forEach(l => {
+      const link = document.createElement('a');
+      link.href = l.href;
+      link.className = 'sidebar-link'; 
+      link.textContent = l.label;
+      sidebar.appendChild(link);
+    });
+
+    document.body.appendChild(sidebar);
+  }
 
   document.querySelectorAll('.site-nav').forEach(nav => {
     const activeId = nav.dataset.active || '';
+    
+    const activeLink = document.querySelector(`.sidebar-link[href*="${activeId}"]`);
+    if (activeLink) {
+        activeLink.classList.add('active');
+    }
 
- nav.innerHTML = `
- <button class="menu-toggle" onclick="toggleSidebar()">☰ MENU</button>
- <div id="sidebar-overlay" onclick="toggleSidebar()"></div>
- <nav id="sidebar">
- <button class="menu-close" onclick="toggleSidebar()">✕</button>
- <h2 style="font-family: 'Cinzel', serif; color: #8b0000; font-size: 0.875rem; margin-bottom: 2rem; text-transform: uppercase; letter-spacing: 0.1em;">Navigation</h2>
- ${links.map(l => 
- `<a href="${l.href}" class="sidebar-link${l.id === activeId ? ' active' : ''}">${l.label}</a>`
- ).join('\n')}
- </nav>
- `;
+    nav.innerHTML = `
+      <div class="flex items-center justify-between px-6 py-4 absolute top-0 left-0 w-full z-[1990] border-b border-gray-200" style="background-color: #fdfcf9; pointer-events: none;">
+        <img src="assets/logo_nav_v2.webp" alt="MMF Logo" class="h-12 w-auto" style="pointer-events: auto;">
+      </div>
+      <button class="menu-toggle" onclick="toggleSidebar()">☰ MENU</button>
+    `;
   });
 }
 
-// Auto-init when script loads
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initNav);
 } else {
