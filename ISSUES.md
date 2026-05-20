@@ -25,4 +25,7 @@ Use this file to track bugs, features, and technical debt for the RRMNHC Website
 
 ## Completed
 
+- [x] **[BUG] Artifacts viewer black overlay:** Added CSS `display: none` to `.viewer-overlay`, toggled via `.active` class. (2026-05-20)
+- [x] **[BUG] Missing artifact thumbnails:** Committed correct `.webp` thumbnails matching HTML references. (2026-05-20)
+- [x] **[UI] Hero logo size:** Increased from h-24 to lg:h-36/xl:h-40 for desktop. (2026-05-20)
 - [x] **[DOCS] Initialize Documentation Suite:** Created `AGENTS.md`, `ISSUES.md`, and reviewed `README.md`/`CHANGELOG.md`. (2026-05-15)

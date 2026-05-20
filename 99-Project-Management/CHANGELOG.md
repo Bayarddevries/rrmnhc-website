@@ -5,6 +5,17 @@ All changes are tracked via Git. This log provides a high-level history of major
 ## [Unreleased]
 - *Pending implementation of Reader Rail prototypes.*
 
+## [1.0.1] - 2026-05-20
+### Added
+- **Artifacts Viewer Overlay CSS:** Added full styling for `.viewer-overlay` (hidden by default, `.active` toggle), `.viewer-close`, `.viewer-loading`, `.loading-ring`, `.model-label`, `.viewer-hint` — overlay only shows on "View in 3D" click.
+- **WebP thumbnails:** Added 5 artifact thumbnail `.webp` files to `Artifacts/Thumbnails/` for faster loading and case-correct references.
+- **Hero logo responsive sizing:** Desktop logo increased from `h-24` (96px) to `lg:h-36` (144px) / `xl:h-40` (160px).
+
+### Fixed
+- **Artifacts page black overlay:** The viewer overlay was `fixed inset-0` without `display:none`, covering the page. Added CSS to hide by default.
+- **Broken thumbnail images:** HTML referenced `{n}.webp` but only `{n}.PNG` files existed (case mismatch on Linux/GitHub Pages). Committed correct WebP files.
+- **Git repo confusion:** Previously made branding changes in `branded-v1/` snapshot instead of the actual nested git repo (`rrmnhc-website/rrmnhc-website/`). All changes now in the correct repo and pushed.
+
 ## [1.0.0] - 2026-04-09
 ### Added
 - **Core Website Structure:** Established `index.html`, `news.html`, and `contact.html`.

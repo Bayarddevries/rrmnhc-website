@@ -74,3 +74,24 @@ Agents must verify:
 | `shared/site-nav.js` | Local cross-site navigation |
 | `Artifacts/` | 3D models and assets |
 | `99-Project-Management/` | Changelog & session logs |
+
+---
+
+## Artifacts Viewer Overlay
+
+The 3D viewer overlay (`#viewer-overlay`) is hidden by default (`display: none`) via `.viewer-overlay` CSS class. Clicking "View in 3D" on an artifact card calls `openViewer(index)` which adds the `.active` class (`display: block`). The close button calls `closeViewer()` which removes `.active`.
+
+**CSS in `assets/css/style.css`:**
+- `.viewer-overlay` — `display: none`, `z-index: 1000`
+- `.viewer-overlay.active` — `display: block`
+- `.viewer-close` — absolute positioned close button (top-right, circle)
+- `.viewer-loading` — centered loading state with spinning ring
+- `.model-label` — artifact name overlay at bottom center
+- `.viewer-hint` — "Drag to rotate" instruction
+
+**JS in `artifacts-viewer.html`:**
+- `renderGrid()` — builds artifact cards from the `artifacts` array (5 GLB scans)
+- `openViewer(index)` — creates Three.js scene, camera, lights, loads GLB via GLTFLoader
+- `closeViewer()` — disposes renderer, removes scene, cancels animation frame
+
+**Thumbnail files:** `Artifacts/Thumbnails/{1-5}.webp` — committed as WebP; HTML references matching filenames and extensions.`.PNG` originals also present but not referenced by HTML.
