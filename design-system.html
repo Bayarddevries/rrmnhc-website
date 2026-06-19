@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RRMNHC | Design System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .token-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+        .token-box { border: 1px solid var(--rrmnhc-border); padding: 1rem; background: white; border-radius: var(--radius-md); }
+        .color-swatch { width: 100%; height: 40px; border-radius: var(--radius-sm); margin-bottom: 0.5rem; border: 1px solid #ddd; }
+        .surface { border: 1px solid var(--rrmnhc-border); border-radius: var(--radius-sm); }
+    </style>
+</head>
+<body class="relative bg-gray-50">
+    <div class="doc-texture"></div>
+
+    <nav class="fixed top-0 left-0 w-full z-[100] px-6 py-6 flex justify-between items-center bg-white/80 backdrop-blur-sm border-b border-gray-200">
+        <div class="cinzel font-bold text-xs tracking-widest text-red-800">RRMNHC DESIGN SYSTEM</div>
+        <a href="index.html" class="text-xs uppercase tracking-widest opacity-60 hover:opacity-100 transition-opacity">Back to Site</a>
+    </nav>
+
+    <main class="pt-32 px-8 pb-24 max-w-6xl mx-auto">
+        <header class="mb-16">
+            <h1 class="text-5xl font-bold mb-4">Design Token Lab</h1>
+            <p class="text-lg opacity-70">Current visual language for RRMNHC and the Shoebox Digital Archive.</p>
+        </header>
+
+        <!-- Color Palette -->
+        <section class="mb-20">
+            <h2 class="cinzel text-2xl tracking-widest text-red-800 mb-8 border-b pb-2">Color Palette</h2>
+            <div class="token-grid">
+                <div class="token-box">
+                    <div class="color-swatch" style="background-color: var(--mmf-red)"></div>
+                    <div class="text-xs font-bold uppercase">MMF Red <span class='text-gray-400 ml-1'>#8B0000</span></div>
+                    <div class="text-[10px] opacity-50">--mmf-red</div>
+                </div>
+                <div class="token-box">
+                    <div class="color-swatch" style="background-color: var(--mmf-charcoal)"></div>
+                    <div class="text-xs font-bold uppercase">Charcoal <span class='text-gray-400 ml-1'>#2C2C2C</span></div>
+                    <div class="text-[10px] opacity-50">--mmf-charcoal</div>
+                </div>
+                <div class="token-box">
+                    <div class="color-swatch" style="background-color: var(--rrmnhc-parchment)"></div>
+                    <div class="text-xs font-bold uppercase">Parchment <span class='text-gray-400 ml-1'>#FDFCF9</span></div>
+                    <div class="text-[10px] opacity-50">--rrmnhc-parchment</div>
+                </div>
+                <div class="token-box">
+                    <div class="color-swatch" style="background-color: var(--rrmnhc-cream)"></div>
+                    <div class="text-xs font-bold uppercase">Cream <span class='text-gray-400 ml-1'>#F4F1EA</span></div>
+                    <div class="text-[10px] opacity-50">--rrmnhc-cream</div>
+                </div>
+                <div class="token-box">
+                    <div class="color-swatch" style="background-color: var(--rrmnhc-white)"></div>
+                    <div class="text-xs font-bold uppercase">White <span class='text-gray-400 ml-1'>#FFFFFF</span></div>
+                    <div class="text-[10px] opacity-50">--rrmnhc-white</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Typography -->
+        <section class="mb-20">
+            <h2 class="cinzel text-2xl tracking-widest text-red-800 mb-8 border-b pb-2">Typography</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="token-box space-y-4">
+                    <div class="text-center mb-4">
+                        <span class="text-xs uppercase tracking-widest opacity-50 block mb-2">Monumental / Header</span>
+                        <div class="text-4xl font-bold cinzel text-center">Cinzel</div>
+                    </div>
+                    <div class="bg-gray-100 p-2 rounded-sm mb-4">
+                        <span class="text-[10px] uppercase font-bold text-red-800 block mb-1">Used In:</span>
+                        <code class="text-[10px] text-gray-600">.cinzel, Logo, Page Titles, Buttons</code>
+                    </div>
+                    <p class="text-xs opacity-70 leading-relaxed">
+                        <strong>Role:</strong> High-impact headings and branding.<br>
+                        <strong>Vibe:</strong> Classical, stone-carved, authoritative.
+                    </p>
+                </div>
+                <div class="token-box space-y-4">
+                    <div class="text-center mb-4">
+                        <span class="text-xs uppercase tracking-widest opacity-50 block mb-2">Historical / Authority</span>
+                        <div class="text-4xl font-bold serif text-center" style="font-family: 'Playfair Display', serif;">Playfair Display</div>
+                    </div>
+                    <div class="bg-gray-100 p-2 rounded-sm mb-4">
+                        <span class="text-[10px] uppercase font-bold text-red-800 block mb-1">Used In:</span>
+                        <code class="text-[10px] text-gray-600">h1, h2, h3, .serif, Article Headlines</code>
+                    </div>
+                    <p class="text-xs opacity-70 leading-relaxed">
+                        <strong>Role:</strong> Section headers and emphasized narratives.<br>
+                        <strong>Vibe:</strong> 19th-century print, academic, archival.
+                    </p>
+                </div>
+                <div class="token-box space-y-4">
+                    <div class="text-center mb-4">
+                        <span class="text-xs uppercase tracking-widest opacity-50 block mb-2">Modern / Accessible</span>
+                        <div class="text-4xl font-medium text-center" style="font-family: 'Inter', sans-serif;">Inter</div>
+                    </div>
+                    <div class="bg-gray-100 p-2 rounded-sm mb-4">
+                        <span class="text-[10px] uppercase font-bold text-red-800 block mb-1">Used In:</span>
+                        <code class="text-[10px] text-gray-600">body, Navigation, Card Body, Forms</code>
+                    </div>
+                    <p class="text-xs opacity-70 leading-relaxed">
+                        <strong>Role:</strong> Body copy, navigation, and functional UI.<br>
+                        <strong>Vibe:</strong> Clean, neutral, highly legible.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Components -->
+        <section class="mb-20">
+            <h2 class="cinzel text-2xl tracking-widest text-red-800 mb-8 border-b pb-2">Component Lab</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="space-y-6">
+                    <h3 class="text-sm uppercase tracking-widest opacity-50">Buttons</h3>
+                    <div class="flex flex-wrap gap-4">
+                        <button class="btn-primary">Primary Action</button>
+                        <button class="btn-primary" style="background-color: var(--mmf-charcoal);">Secondary Action</button>
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <h3 class="text-sm uppercase tracking-widest opacity-50">Cards & Surfaces</h3>
+                    <div class="card">
+                        <p class="text-sm italic">This card uses the global tokens for padding, radius, and shadow.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Rhythm -->
+        <section class="mb-20">
+            <h2 class="cinzel text-2xl tracking-widest text-red-800 mb-8 border-b pb-2">Typography & Rhythm</h2>
+            <div class="space-y-8 bg-white p-8 border border-gray-200 rounded-sm">
+                <div>
+                    <span class="text-xs opacity-40 block mb-2">H1 - 6xl</span>
+                    <h1 class="text-6xl font-bold">Monumental Heading</h1>
+                </div>
+                <div>
+                    <span class="text-xs opacity-40 block mb-2">H2 - 4xl</span>
+                    <h2 class="text-4xl font-bold">Sub-heading Style</h2>
+                </div>
+                <div>
+                    <span class="text-xs opacity-40 block mb-2">Body</span>
+                    <p class="text-base">The quick brown fox jumps over the lazy dog. This is the standard body text used for long-form narratives.</p>
+                </div>
+                <div>
+                    <span class="text-xs opacity-40 block mb-2">Caption</span>
+                    <p class="text-xs uppercase tracking-widest opacity-60">Source: Archive / Collection B</p>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
